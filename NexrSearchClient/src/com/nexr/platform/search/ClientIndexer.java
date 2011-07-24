@@ -79,9 +79,9 @@ public class ClientIndexer implements DataConsumer<RoutingEvent> {
              *
              ************************************************************************************************************************/
             /* SDP Config */
-            confFilePath = "/home/david/Dropbox/IdeaProjects/DavidResearch/NexrSearchClient/config/properties/SdpClient.conf";
-            dataFilePath = "/home/david/Data/SearchPlatform/SDP/hdfs/data";
-            logFilePath = "/home/david/Dropbox/IdeaProjects/DavidResearch/NexrSearchClient/logs/test.log";
+            confFilePath = "/Users/panelion/IdeaProject/DavidResearch/NexrSearchClient/config/properties/SdpClient.conf";
+            dataFilePath = "/Users/panelion/Data/SearchPlatform/SDP/hdfs/data";
+            logFilePath = "/Users/panelion/IdeaProject/DavidResearch/NexrSearchClient/logs/test.log";
 
             /* CDR Config */
             /*
