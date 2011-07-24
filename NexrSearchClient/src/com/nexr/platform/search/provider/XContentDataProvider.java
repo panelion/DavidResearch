@@ -16,7 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Properties;
 
-public class XContentDataProvider extends StreamDataProvider {
+public class XContentDataProvider extends StreamDataProvider<RoutingEvent> {
 
     public static final String ROUTING_EVENT_DATA_TYPE = "routing.event.data.type";
     public static final String LOG_RECORD_TIMESTAMP_FIELD_NAME = "log.record.timestamp.field.name";
