@@ -1,0 +1,113 @@
+{
+	"TransactionLog" : {
+		"_all" : {"enabled" : false},
+		"_source" : {"enabled" : false},
+		"_type" : {"index" : "no"},
+    "_meta" : {
+			"nexr.filters" : {
+				"exclusion" : { "fields" : "transactionlog.systemheader.logtype" },
+				"simple" : {"separator":"."},
+				"lowercase" : {}
+			},
+			"nexr.timestamp" : "timestamp",
+                        "nexr.timestamp.format" : "yyyy-MM-dd HH:mm:ss.SSS"
+		},
+		"properties" : {
+			"corpid" : {
+				"type" : "string",
+				"store" : "no",
+				"index" : "not_analyzed"
+			},
+			"systemid" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"userid" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"screenid" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"transactionid" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"seqnumber" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"timestamp" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"moduletype" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"servername" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"serverip" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"objectname" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"methodname" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "analyzed"
+			},
+			"payloadsize" : {
+				"type" : "long",
+				"store" : "yes",
+				"index" : "not_analyzed"
+                        },
+			"logtype" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"resultcode" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"resultdescription" : {
+				"type" : "string",
+				"store" : "no",
+				"index" : "no"
+			},
+			"errorcode" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"errordescription" : {
+				"type" : "string",
+				"store" : "no",
+				"index" : "no"
+			},
+			"payload" : {
+				"type" : "string",
+				"store" : "no",
+				"index" : "analyzed"
+			}
+		}
+	}
+}
