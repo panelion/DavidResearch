@@ -1,9 +1,7 @@
 package com.nexr.platform.search.provider;
 
-import com.nexr.platform.search.ClientIndexer;
 import com.nexr.platform.search.consumer.DataConsumer;
 import com.nexr.platform.search.consumer.DataConsumer.DataEvent;
-import com.nexr.platform.search.router.Router;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -12,7 +10,7 @@ import java.util.LinkedList;
 public abstract class StreamDataProvider<V> implements DataProvider<V> {
 
     private int _batchSize;
-	private DataConsumer _consumer;
+	private DataConsumer<V> _consumer;
 	private DataThread<V> _thread;
 
 	public StreamDataProvider()
@@ -21,7 +19,7 @@ public abstract class StreamDataProvider<V> implements DataProvider<V> {
 		_consumer=null;
 	}
 
-	public void setDataConsumer(DataConsumer consumer)
+	public void setDataConsumer(DataConsumer<V> consumer)
 	{
 	  _consumer = consumer;
 	}

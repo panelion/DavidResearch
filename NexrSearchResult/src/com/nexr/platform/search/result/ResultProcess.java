@@ -10,6 +10,11 @@ import org.jfree.data.xy.XYSeriesCollection;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * ElasticSearch Client Result Log 파일을 download 후, 분석 하여, chart image 로 저장 한다.
+ * David.Woo - 2011.07.20
+ *
+ */
 public class ResultProcess {
 
     private ArrayList<ServerInfoEntity> serverList;
@@ -24,6 +29,17 @@ public class ResultProcess {
     private final String _remoteLogDirPath;
     private final boolean _isAverage;
 
+    /**
+     * Constructor
+     *
+     * @param hostInfoFile      Tab 으로 구분된 Server 정보를 저장한 파일의 경로.
+     * @param logFileName       서버에 저장된 로그 파일의 이름. 확장자 는 제외 한다.
+     * @param saveDirPath       로컬에 이미지 및 로그 파일 이 저장 될 경로
+     * @param remoteLogDirPath  서버 로그 파일이 저장된 directory 의 경로
+     * @param isAverage         TPS 평균치 저장 시 True, Second 별 Chart 생성 시 False
+     *
+     * @throws IOException      Server 정보 파일을 읽다가 에러가 날 경우의 Exception
+     */
     public ResultProcess(String hostInfoFile, String logFileName, String saveDirPath, String remoteLogDirPath, boolean isAverage) throws IOException {
 
         /**
@@ -48,10 +64,6 @@ public class ResultProcess {
                     if(cols.length == 4) entity.setPromptString(cols[3]);
 
                     serverList.add(entity);
-
-
-
-
                 }
             }
         }
@@ -62,6 +74,14 @@ public class ResultProcess {
         _isAverage = isAverage;
     }
 
+    /**
+     * 서버별 로 로그 파일 download 후, Chart Data 를 생성 한다.
+     * 생성 후, 챠트 image 를 저장 한다.
+     *
+     * @param saveFilePath  chart Image 저장 directory 경로
+     * @param width 저장할 이미지 가로 사이즈
+     * @param height 저장할 이미지 세로 사이즈
+     */
     public void process(String saveFilePath, int width, int height) {
 
         FtpClient ftpClient;
@@ -105,6 +125,14 @@ public class ResultProcess {
         }
     }
 
+    /**
+     * 서버별 로 로그 파일 download 후, Chart Data 를 생성 한다.
+     * 생성 후, 챠트 image 를 개별적 으로 저장 한다.
+     *
+     * @param saveFilePath  chart Image 저장 directory 경로
+     * @param width 저장할 이미지 가로 사이즈
+     * @param height 저장할 이미지 세로 사이즈
+     */
     public void processIndividual(String saveFilePath, int width, int height) {
 
         FtpClient ftpClient;
@@ -145,6 +173,13 @@ public class ResultProcess {
         }
     }
 
+    /**
+     * log file 의 data 를 parsing 하여, Chart DataSet 생성.
+     *
+     * @param localFilePath log file 경로
+     * @param entity 서버 정보 Entity Class
+     * @return XySeries Data Set.
+     */
     private XYSeries makeDataSet(String localFilePath, ServerInfoEntity entity) {
 
         String chartName = entity.getHostName();
@@ -158,7 +193,7 @@ public class ResultProcess {
             String row;
             while((row = reader.readLine()) != null){
                 if(!row.isEmpty()) {
-                    double x = 0.0D , y = 0.0D;
+                    double x, y;
                     String[] cols = row.split(_colSeparator);
 
                     if(cols.length > 4) {
@@ -190,8 +225,8 @@ public class ResultProcess {
     public static void main(String[] args){
 
         String hostInfoFile, logFileName, saveDirPath, remoteLogDirPath, saveChartFilePath;
-        boolean isAverage = false;
-        boolean isSaveImageIndividual = true;
+        boolean isAverage;
+        boolean isSaveImageIndividual;
 
         int width, height;
 
@@ -210,15 +245,15 @@ public class ResultProcess {
 
         } else {
             hostInfoFile = "/home/david/Execute/ResultProcess/config/HostInfo.conf";
-            logFileName = "IndexingTest03";
+            logFileName = "IndexingTest01";
             saveDirPath = "/home/david/Execute/ResultProcess/save/";
             remoteLogDirPath = "/home/search/elasticsearch_client/logs/";
             saveChartFilePath = "/home/david/";
             width = 2000;
             height = 500;
 
-            isAverage = true;
-            isSaveImageIndividual = false;
+            isAverage = false;
+            isSaveImageIndividual = true;
         }
 
         try {

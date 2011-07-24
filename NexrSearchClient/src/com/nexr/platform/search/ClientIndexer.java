@@ -1,11 +1,11 @@
 package com.nexr.platform.search;
 
+import com.nexr.platform.search.consumer.DataConsumer;
 import com.nexr.platform.search.provider.XContentDataProvider;
 import com.nexr.platform.search.router.Router;
 import com.nexr.platform.search.router.RouterFactory;
 import com.nexr.platform.search.router.RoutingEvent;
 import com.nexr.platform.search.router.RoutingException;
-import com.nexr.platform.search.consumer.DataConsumer;
 import com.nexr.platform.search.util.TimerClass;
 
 import java.io.FileInputStream;

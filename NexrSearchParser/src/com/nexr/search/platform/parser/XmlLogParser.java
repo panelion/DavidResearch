@@ -135,8 +135,8 @@ public class XmlLogParser {
         XmlLogParser logParser = new XmlLogParser();
 
         try {
-            String logSrc = "", writeSrc = "";
-            int roofCount = 0;
+            String logSrc, writeSrc;
+            int roofCount;
 
             if(args.length > 0){
                 logSrc = args[0];
