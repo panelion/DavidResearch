@@ -1,0 +1,192 @@
+{
+	"wcd" : {
+		"_all" : {"enabled" : false},
+		"_source" : {"enabled" : false},
+		"_type" : {"index" : "no"},
+
+		"properties" : {
+			"I_ETL_DT" : {
+				"type" : "long", 
+				"store" : "yes", 
+				"null_value" : "0", 
+				"index" : "analyzed"
+			},
+			"I_CALL_DT" : {
+				"type" : "long", 
+				"store" : "yes", 
+				"null_value" : "0",  
+				"index" : "analyzed"
+			},
+			"I_INOUT" : {
+				"type" : "string", 
+				"store" : "yes", 
+				"index" : "analyzed"
+			},
+			"I_OUT_CTN" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "analyzed"
+			},
+			"I_OUT_CC" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"I_IN_CTN" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "analyzed"
+			},
+			"I_IN_CC" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"I_HLR" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"I_BONBU" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"I_CALLING_SWITCH" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "analyzed"
+			},
+			"I_CALLED_SWITCH" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "analyzed"
+			},
+			"I_BSC" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "analyzed"
+			},
+			"I_CELL" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "analyzed"
+			},
+			"I_SECTOR" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"I_IN_ROUTE" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"I_OUT_ROUTE" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"I_PORTABIL_NO" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"I_PORTABIL_ORG" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"I_SUBSCRIBER_TYPE" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"I_SERVICE_GRP" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"I_SERVICE" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"I_CFC_GRP" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "analyzed"
+			},
+			"I_CFC" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"I_CFC_TYPE" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"I_NET_CLS" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"I_PREFIX" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"AMT_CALL" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"AMT_PDD_CALL" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"I_PRICEPLAN" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "analyzed"
+			},
+			"I_TARGET_ORG" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"I_BASIC_SERVICE" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"I_DURATION" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"I_MNP_2" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"I_WCDMA_FCI" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			},
+			"I_MODEL" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "analyzed"
+			},
+			"I_RELEASE_TIME" : { 
+				"type" : "string",
+				"store" : "yes", 
+				"index" : "not_analyzed"
+			}
+		}
+	}
+}
