@@ -21,4 +21,5 @@ public interface DataConsumer<V> {
 	}
 
 	void consume(Collection<DataEvent<V>> data) throws IOException;
+    long getConsumeCount();
 }

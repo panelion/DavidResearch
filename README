@@ -1,2 +1,3 @@
-This file was created by IntelliJ IDEA 10.5.1 for binding GitHub repository
-This file was modified by IntelliJ IDEA 10.5.1 for binding GitHub repository
+설치는 DPSR Project 가 있는 폴더의 같은 레벨에 설치 한다.
+NexrSearchClient, NexrSearchParser 의 경우 DPSR 의 distribution 폴더를 참조 하기 때문에,
+DPSR Project 가 항상 최신의 버전으로 빌드가 된 상태에서 작업을 한다.

@@ -1,7 +1,8 @@
 package com.nexr.platform.search.util;
 
 import com.nexr.platform.search.ClientIndexer;
-import com.nexr.platform.search.provider.XContentDataProvider;
+import com.nexr.platform.search.consumer.DataConsumer;
+import com.nexr.platform.search.provider.DataProvider;
 
 import java.io.*;
 import java.util.TimerTask;
@@ -9,8 +10,8 @@ import java.util.TimerTask;
 public class TimerClass extends TimerTask {
 
 
-    private final XContentDataProvider _provider;
-    private final ClientIndexer _consumer;
+    private final DataProvider _provider;
+    private final DataConsumer _consumer;
     private PrintWriter _printWriter;
 
     private volatile double _produceAvg = 0.0d;
@@ -34,7 +35,7 @@ public class TimerClass extends TimerTask {
 
     private long _lastTime;
 
-    public TimerClass(XContentDataProvider provider, ClientIndexer indexer, String logFilePath) throws IOException {
+    public TimerClass(DataProvider provider, DataConsumer indexer, String logFilePath) throws IOException {
         _provider = provider;
         _consumer = indexer;
 

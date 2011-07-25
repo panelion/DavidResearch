@@ -16,7 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Properties;
 
-public class XContentDataProvider extends StreamDataProvider<RoutingEvent> {
+public class SdpXContentDataProvider extends StreamDataProvider<RoutingEvent> {
 
     public static final String ROUTING_EVENT_DATA_TYPE = "routing.event.data.type";
     public static final String LOG_RECORD_TIMESTAMP_FIELD_NAME = "log.record.timestamp.field.name";
@@ -30,20 +30,12 @@ public class XContentDataProvider extends StreamDataProvider<RoutingEvent> {
     private final String _timestampFieldName;
     private final DateFormat _timestampFormat;
 
-    private volatile long _produceCount;
-
-    public long getProduceCount() {
-        return _produceCount;
-    }
-
-
-    public XContentDataProvider(String valuePath, Properties prof){
+    public SdpXContentDataProvider(String valuePath, Properties prof){
 
         Configuration _conf = new Configuration();
         _prof = prof;
 
         try {
-
             FileSystem fs = FileSystem.get(_conf);
 
             _valueReader = new SequenceFile.Reader(fs, new Path(valuePath), _conf);

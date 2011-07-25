@@ -13,7 +13,7 @@ import javax.xml.stream.events.XMLEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class XmlParser {
+public class SdpDataParser {
 
     private String _xmlFilePath;
 
@@ -22,10 +22,6 @@ public class XmlParser {
     public void setXmlFilePath(String xmlFilePath){
         this._xmlFilePath = xmlFilePath;
     }
-
-
-
-
 
     public XMLEventReader getXmlEventReader(){
         return this._xmlEventReader;
@@ -98,7 +94,7 @@ public class XmlParser {
             xmlFilePath = "/home/david/Data/SearchPlatform/SDP/sdpXmlData.xml";
         }
 
-        XmlParser xmlParser = new XmlParser();
+        SdpDataParser xmlParser = new SdpDataParser();
         MapFileWriter mapFileWriter = new MapFileWriter(mapFilePath);
 
         xmlParser.setXmlFilePath(xmlFilePath);

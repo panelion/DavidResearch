@@ -10,7 +10,7 @@ import java.util.LinkedList;
 public abstract class StreamDataProvider<V> implements DataProvider<V> {
 
     private int _batchSize;
-	private DataConsumer<V> _consumer;
+	protected DataConsumer<V> _consumer;
 	private DataThread<V> _thread;
 
 	public StreamDataProvider()
@@ -19,12 +19,17 @@ public abstract class StreamDataProvider<V> implements DataProvider<V> {
 		_consumer=null;
 	}
 
-	public void setDataConsumer(DataConsumer<V> consumer)
-	{
-	  _consumer = consumer;
-	}
+    public void setDataConsumer(DataConsumer<V> consumer) {
+        _consumer = consumer;
+    }
 
-	public abstract DataEvent<V> next();
+    protected volatile long _produceCount;
+
+    public long getProduceCount() {
+        return _produceCount;
+    }
+
+    public abstract DataEvent<V> next();
 
 	public abstract void reset();
 
