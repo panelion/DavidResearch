@@ -1,0 +1,122 @@
+{
+	"TXLOG" : {
+		"_all" : {"enabled" : false},
+		"_source" : {"enabled" : false},
+		"_type" : {"index" : "no"},
+		"_routing" : 	{ 
+					"required" : true,
+					"path" : "TXID"
+				},
+		"_meta" : {
+			"nexr.filters" : {
+			    "simple" : {"separator":"."},
+			    "uppercase" : {},
+				"exclusion" : { "fields" : ["ACKCHECKSUM", "ACKTAG", "ACKTYPE", "ROLLTAG", "TAILSRCFILE"]}
+			},
+			"nexr.timestamp" : "TS",
+            "nexr.timestamp.format" : "yyyy-MM-dd HH:mm:ss.SSS"
+		},
+		"properties" : {
+			"CID" : {
+				"type" : "string",
+				"store" : "no",
+				"index" : "not_analyzed"
+			},
+			"SYSID" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"LT" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"UID" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"SCID" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"TXID" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"SEQ" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"TS" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"MT" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"SN" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"SIP" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"ON" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"MN" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "analyzed"
+			},
+			"PLS" : {
+				"type" : "long",
+				"store" : "yes",
+				"index" : "not_analyzed"
+                        },
+			"LTP" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"RC" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"RD" : {
+				"type" : "string",
+				"store" : "no",
+				"index" : "no"
+			},
+			"EC" : {
+				"type" : "string",
+				"store" : "yes",
+				"index" : "not_analyzed"
+			},
+			"ED" : {
+				"type" : "string",
+				"store" : "no",
+				"index" : "no"
+			},
+			"PL" : {
+				"type" : "string",
+				"store" : "no",
+				"index" : "analyzed"
+			}
+		}
+	}
+}
