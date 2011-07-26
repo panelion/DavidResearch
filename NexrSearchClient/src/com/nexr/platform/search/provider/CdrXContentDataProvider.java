@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 
 /**
@@ -71,10 +72,17 @@ public class CdrXContentDataProvider extends StreamDataProvider<RoutingEvent> {
                 event.setId(logRecordKey.getLogId());
                 String timestampValue = logRecord.getValue(_timestampFieldName);
 
-                if(timestampValue != null)
-                    event.setTimeStamp(_timestampFormat.parse(timestampValue).getTime());
-                else
+                if(timestampValue != null) {
+                    try {
+                        event.setTimeStamp(_timestampFormat.parse(timestampValue).getTime());
+                    } catch(Exception e){
+                        Date date = new Date();
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+                        event.setTimeStamp(_timestampFormat.parse(simpleDateFormat.format(date)).getTime());
+                    }
+                } else {
                     event.setTimeStamp(LogRecordKey.formatter.parse(logRecordKey.getTime()).getTime());
+                }
 
                 // event.setIndex();
 

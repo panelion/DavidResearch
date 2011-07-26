@@ -11,24 +11,21 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.SequenceFile;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Properties;
 
 public class SdpXContentDataProvider extends StreamDataProvider<RoutingEvent> {
 
     public static final String ROUTING_EVENT_DATA_TYPE = "routing.event.data.type";
-    public static final String LOG_RECORD_TIMESTAMP_FIELD_NAME = "log.record.timestamp.field.name";
+    /*public static final String LOG_RECORD_TIMESTAMP_FIELD_NAME = "log.record.timestamp.field.name";
     public static final String LOG_RECORD_TIMESTAMP_FORMAT = "log.record.timestamp.format";
-    public static final String DEFAULT_LOG_RECORD_TIMESTAMP_FORMAT = "yyyy-MM-dd HH:mm:ss.SSS";
+    public static final String DEFAULT_LOG_RECORD_TIMESTAMP_FORMAT = "yyyy-MM-dd HH:mm:ss.SSS";*/
 
 
     private SequenceFile.Reader _valueReader;
     private final Properties _prof;
 
-    private final String _timestampFieldName;
-    private final DateFormat _timestampFormat;
+    /*private final String _timestampFieldName;
+    private final DateFormat _timestampFormat;*/
 
     public SdpXContentDataProvider(String valuePath, Properties prof){
 
@@ -44,8 +41,8 @@ public class SdpXContentDataProvider extends StreamDataProvider<RoutingEvent> {
             e.printStackTrace();
         }
 
-        _timestampFieldName = _prof.getProperty(LOG_RECORD_TIMESTAMP_FIELD_NAME, "TransactionLog.DataHeader.Timestamp");
-        _timestampFormat = new SimpleDateFormat(_prof.getProperty(LOG_RECORD_TIMESTAMP_FORMAT, DEFAULT_LOG_RECORD_TIMESTAMP_FORMAT));
+        /*_timestampFieldName = _prof.getProperty(LOG_RECORD_TIMESTAMP_FIELD_NAME, "TransactionLog.DataHeader.Timestamp");
+        _timestampFormat = new SimpleDateFormat(_prof.getProperty(LOG_RECORD_TIMESTAMP_FORMAT, DEFAULT_LOG_RECORD_TIMESTAMP_FORMAT));*/
 
         _produceCount = 0;
     }
@@ -63,12 +60,13 @@ public class SdpXContentDataProvider extends StreamDataProvider<RoutingEvent> {
             if(_valueReader.next(logRecordKey, logRecord)) {
 
                 event.setId(logRecordKey.getLogId());
-                String timestampValue = logRecord.getValue(_timestampFieldName);
+
+                /*String timestampValue = logRecord.getValue(_timestampFieldName);
 
                 if(timestampValue != null)
                     event.setTimeStamp(_timestampFormat.parse(timestampValue).getTime());
                 else
-                    event.setTimeStamp(LogRecordKey.formatter.parse(logRecordKey.getTime()).getTime());
+                    event.setTimeStamp(LogRecordKey.formatter.parse(logRecordKey.getTime()).getTime());*/
 
                 // event.setIndex();
 
@@ -80,9 +78,6 @@ public class SdpXContentDataProvider extends StreamDataProvider<RoutingEvent> {
                 event = null;
             }
         } catch (IOException e) {
-            e.printStackTrace();
-            event = null;
-        } catch (ParseException e) {
             e.printStackTrace();
             event = null;
         }

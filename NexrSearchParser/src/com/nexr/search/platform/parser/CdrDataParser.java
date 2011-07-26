@@ -47,7 +47,7 @@ public class CdrDataParser {
 
         String row;
         while((row = reader.readLine()) != null){
-            _arrColumnData.add(row.trim());
+            if(!row.isEmpty()) _arrColumnData.add(row.trim());
         }
     }
 
@@ -74,7 +74,7 @@ public class CdrDataParser {
             for(int i = 0 ; i < _arrColumnData.size(); i++){
                 String col;
                 try {
-                    col = cols[i];
+                    col = cols[i].trim();
                 } catch(Exception e){
                     col = "";
                 }
