@@ -35,6 +35,10 @@ public class SdpDataParser implements DataParser {
      * @param columnFilePath
      */
     public SdpDataParser(String mapFilePath, String xmlFilePath, String columnFilePath){
+
+        File mapFile = new File(mapFilePath);
+        if(!mapFile.isDirectory()) mapFile.mkdirs();
+
         _mapFileWriter = new MapFileWriter(mapFilePath);
         _mapColumnData = new HashMap<String, String>();
 
@@ -195,7 +199,14 @@ public class SdpDataParser implements DataParser {
                     /**
                      * TODO : 이 부분 에서, key 값을 Converting 한다.
                      */
-                    logRecord.add(key, value);
+                    if(_mapColumnData.containsKey(key)) {
+                        String temp_key = _mapColumnData.get(key);
+                        key = temp_key;
+                        logRecord.add(key, value);
+                    } else {
+                        System.out.println("[ERROR CODE] : " + key + " + " + value);
+                    }
+
                     key = keyValue + _SEPARATOR;
                     value = "";
                 }
@@ -216,16 +227,11 @@ public class SdpDataParser implements DataParser {
         } else {
             mapFilePath = "/home/david/Data/SearchPlatform/SDP/hdfs/";
             xmlFilePath = "/home/david/Data/SearchPlatform/SDP/sdpXmlData.xml";
-            columnFilePath = "/Users/panelion/Data/SearchPlatform/SDP/sdpXColumn.txt";
+            columnFilePath = "/home/david/Data/SearchPlatform/SDP/SdpColumnDefine.txt";
         }
 
         SdpDataParser xmlParser = new SdpDataParser(mapFilePath, xmlFilePath, columnFilePath);
         xmlParser.start();
         xmlParser.close();
-
-
-
-
-
     }
 }
