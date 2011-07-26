@@ -15,14 +15,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Xml 형태로 된, SDP Data 를 읽어와 Hadoop File System 형식의 LogRecordKey, LogRecord 의 Map 형태로 저장한다.
+ * Xml 형태로 된, SDP Data 를 읽어와 Hadoop File System 형식의 LogRecordKey, LogRecord 의 Map 형태로 저장 한다.
  * David.Woo - 2011.07.26
  */
 public class SdpDataParser implements DataParser {
 
     private final String _SEPARATOR = ".";
-    private final String _ENCODING = "UTF-8";
-    private final String _SPLIT = "\t";
 
     private XMLEventReader _xmlEventReader;
     private MapFileWriter _mapFileWriter;
@@ -30,9 +28,9 @@ public class SdpDataParser implements DataParser {
 
     /**
      * Constructor
-     * @param mapFilePath   File System 을 저장 할 경로 ( 디렉 토리 )
-     * @param xmlFilePath   Xml File 경로
-     * @param columnFilePath
+     * @param mapFilePath       File System 을 저장 할 경로 ( 디렉 토리 )
+     * @param xmlFilePath       Xml File 경로
+     * @param columnFilePath    Column Define File Path
      */
     public SdpDataParser(String mapFilePath, String xmlFilePath, String columnFilePath){
 
@@ -57,15 +55,18 @@ public class SdpDataParser implements DataParser {
      * Xml Data Node Name 을 컨버팅 한다.
      * File 의 형태는 [원본 노드명] "\t" [바뀔 노드명]이 된다.
      * Ex > TransactionLog.SdpHeader.test   TSL.SHD.test
-     * @param columnFilePath
-     * @throws IOException
+     *
+     * @param columnFilePath    Column Define File Path
+     * @throws IOException      Column File Load Error
      */
     private void loadColumnFile(String columnFilePath) throws IOException {
         File file = new File(columnFilePath);
+        String _ENCODING = "UTF-8";
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), _ENCODING));
         String row;
         while((row = reader.readLine()) != null) {
             if(!row.isEmpty()){
+                String _SPLIT = "\t";
                 String[] cols = row.split(_SPLIT);
                 if(cols.length > 1) _mapColumnData.put(cols[0], cols[1]);
             }
@@ -121,7 +122,7 @@ public class SdpDataParser implements DataParser {
     /**
      * 컬럼의 각 부분 대표 명칭에 대한 Enum
      */
-    public enum COLUMN_LIST{
+    private enum COLUMN_LIST{
         SystemHeader,
         DataHeader,
         Body
@@ -129,8 +130,8 @@ public class SdpDataParser implements DataParser {
 
     /**
      * 종료
-     * @throws XMLStreamException
-     * @throws IOException
+     * @throws XMLStreamException   Xml Close Error
+     * @throws IOException          close Error
      */
     public void close() throws XMLStreamException, IOException {
         _xmlEventReader.close();
@@ -139,12 +140,12 @@ public class SdpDataParser implements DataParser {
 
     /**
      * Xml Data 의 시작 노드 인지를 분별 한다.
-     * @param event
-     * @param columnName
-     * @return
-     * @throws XMLStreamException
+     * @param event                 XmlEvent
+     * @param columnName            Xml Tag Name
+     * @return                      true, false
+     * @throws XMLStreamException   XmlRead Error
      */
-    public boolean isStartNode(XMLEvent event, String columnName) throws XMLStreamException {
+    private boolean isStartNode(XMLEvent event, String columnName) throws XMLStreamException {
         if(event.isStartElement()){
            if(event.asStartElement().getName().getLocalPart().equals(columnName)) {
                return true;
@@ -155,12 +156,12 @@ public class SdpDataParser implements DataParser {
 
     /**
      * Xml Data 의 노드의 끝 부분 인지 분별 한다.
-     * @param event
-     * @param columnName
-     * @return
-     * @throws XMLStreamException
+     * @param event                 XmlEvent
+     * @param columnName            Xml Tag Name
+     * @return                      true, false
+     * @throws XMLStreamException   XmlRead Error
      */
-    public boolean isEndNode(XMLEvent event, String columnName) throws XMLStreamException {
+    private boolean isEndNode(XMLEvent event, String columnName) throws XMLStreamException {
         if(event.isEndElement()){
            if(event.asEndElement().getName().getLocalPart().equals(columnName)) {
                return true;
@@ -171,13 +172,13 @@ public class SdpDataParser implements DataParser {
 
     /**
      * xml Data 를 Parsing 하여, 하위 노드의 Attribute 의 값을 LogRecord 형태로 리턴 한다.
-     * @param logRecord
-     * @param keyValue
-     * @param closedColumnName
-     * @return
-     * @throws XMLStreamException
+     * @param logRecord             저장될 logRecord.
+     * @param keyValue              LogRecord 에 저장 되는 key 값의 prefix
+     * @param closedColumnName      닫히는 Xml Key Tag
+     * @return  LogRecord
+     * @throws XMLStreamException   XmlParsing Error
      */
-    public LogRecord parseToAttribute(LogRecord logRecord, String keyValue, String closedColumnName) throws XMLStreamException {
+    private LogRecord parseToAttribute(LogRecord logRecord, String keyValue, String closedColumnName) throws XMLStreamException {
 
         boolean parseBool = true;
 
@@ -196,12 +197,8 @@ public class SdpDataParser implements DataParser {
                 if(event.asEndElement().getName().getLocalPart().equals(closedColumnName)){
                     parseBool = false;
                 } else {
-                    /**
-                     * TODO : 이 부분 에서, key 값을 Converting 한다.
-                     */
                     if(_mapColumnData.containsKey(key)) {
-                        String temp_key = _mapColumnData.get(key);
-                        key = temp_key;
+                        key = _mapColumnData.get(key);
                         logRecord.add(key, value);
                     } else {
                         System.out.println("[ERROR CODE] : " + key + " + " + value);
