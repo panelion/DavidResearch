@@ -1,3 +1,13 @@
 설치는 DPSR Project 가 있는 폴더의 같은 레벨에 설치 한다.
 NexrSearchClient, NexrSearchParser 의 경우 DPSR 의 distribution 폴더를 참조 하기 때문에,
-DPSR Project 가 항상 최신의 버전으로 빌드가 된 상태에서 작업을 한다.
+DPSR Project 가 항상 최신의 버전 으로 빌드가 된 상태 에서 작업을 한다.
+
+- NexrSearchClient
+ : NexrSearchServer 에 Indexing 하는 역할을 한다.
+ : Sdp, Cdr 관계 없이 작업이 가능 하다.
+
+- NexrSearchParser
+ : 원본 데이터 를 파싱 하여, indexing Hadoop FileSystem 에 저장 한다.
+
+- NexrSearchResult
+ : Indexing 종료 후, TPS 를 저장한 Log File 을 서버로 부터 download 받아, graph 로 생성 한다.
