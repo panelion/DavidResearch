@@ -11,7 +11,7 @@
 			"nexr.filters" : {
 			    "simple" : {"separator":"."},
 			    "uppercase" : {},
-				"exclusion" : { "fields" : ["ACKCHECKSUM", "ACKTAG", "ACKTYPE", "ROLLTAG", "TAILSRCFILE"]}
+				"selection" : {"defined":true }
 			},
 			"nexr.timestamp" : "TS",
             "nexr.timestamp.format" : "yyyy-MM-dd HH:mm:ss.SSS"
