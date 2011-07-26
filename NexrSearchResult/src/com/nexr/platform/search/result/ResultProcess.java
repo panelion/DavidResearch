@@ -40,7 +40,7 @@ public class ResultProcess {
      *
      * @throws IOException      Server 정보 파일을 읽다가 에러가 날 경우의 Exception
      */
-    public ResultProcess(String hostInfoFile, String logFileName, String saveDirPath, String remoteLogDirPath, boolean isAverage) throws IOException {
+    public ResultProcess(String hostInfoFile, String logFileName, String saveDirPath, String remoteLogDirPath, boolean isAverage) throws Exception {
 
         /**
          * download 할 서버 정보를 저장 한다.
@@ -48,6 +48,7 @@ public class ResultProcess {
         serverList = new ArrayList<ServerInfoEntity>();
 
         File file = new File(hostInfoFile);
+        if(!file.exists()) throw new Exception("can't find Host Info File.");
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), _ENCODING));
         String row;
 
@@ -222,6 +223,10 @@ public class ResultProcess {
         return series;
     }
 
+    /**
+     * TODO : 시간 단위 분 단위로 이미지 를 추출 해 낼 수 있게끔 수정 하기.
+     * @param args
+     */
     public static void main(String[] args){
 
         String hostInfoFile, logFileName, saveDirPath, remoteLogDirPath, saveChartFilePath;
@@ -244,9 +249,9 @@ public class ResultProcess {
             isSaveImageIndividual = Boolean.parseBoolean(args[8]);
 
         } else {
-            hostInfoFile = "/home/david/Execute/ResultProcess/config/HostInfo.conf";
-            logFileName = "IndexingTest01";
-            saveDirPath = "/home/david/Execute/ResultProcess/save/";
+            hostInfoFile = "/home/david/IdeaProjects/DavidResearch/NexrSearchResult/config/HostInfo.conf";
+            logFileName = "SdpIndexingTest01";
+            saveDirPath = "/home/david/IdeaProjects/DavidResearch/NexrSearchResult/saves/";
             remoteLogDirPath = "/home/search/elasticsearch_client/logs/";
             saveChartFilePath = "/home/david/";
             width = 2000;
@@ -259,8 +264,8 @@ public class ResultProcess {
         try {
 
             ResultProcess process = new ResultProcess(hostInfoFile, logFileName, saveDirPath, remoteLogDirPath, isAverage);
-            if(isSaveImageIndividual) process.processIndividual(saveChartFilePath, width, height);
-            else process.process(saveChartFilePath, width, height);
+            if(isSaveImageIndividual) process.processIndividual(saveDirPath, width, height);
+            else process.process(saveDirPath, width, height);
 
         } catch (IOException e) {
             e.printStackTrace();

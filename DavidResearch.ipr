@@ -480,11 +480,13 @@
       <CLASSES>
         <root url="file://$PROJECT_DIR$/NexrSearchResult/lib" />
         <root url="file://$PROJECT_DIR$/NexrSearchResult/lib/j2ssh" />
+        <root url="file://$PROJECT_DIR$/NexrSearchResult/lib/j2ssh/lib" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
       <jarDirectory url="file://$PROJECT_DIR$/NexrSearchResult/lib" recursive="false" />
       <jarDirectory url="file://$PROJECT_DIR$/NexrSearchResult/lib/j2ssh" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/NexrSearchResult/lib/j2ssh/lib" recursive="false" />
     </library>
   </component>
 </project>

@@ -6,7 +6,6 @@ import com.sshtools.j2ssh.authentication.PasswordAuthenticationClient;
 import com.sshtools.j2ssh.configuration.ConfigurationLoader;
 import com.sshtools.j2ssh.configuration.SshConnectionProperties;
 import com.sshtools.j2ssh.session.SessionChannelClient;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
