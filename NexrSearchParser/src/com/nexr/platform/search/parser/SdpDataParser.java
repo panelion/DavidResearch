@@ -1,10 +1,10 @@
-package com.nexr.search.platform.parser;
+package com.nexr.platform.search.parser;
 
 import com.nexr.data.sdp.rolling.hdfs.LogRecord;
 import com.nexr.data.sdp.rolling.hdfs.LogRecordKey;
 
-import com.nexr.search.platform.parser.io.AppendRootInputStream;
-import com.nexr.search.platform.parser.io.MapFileWriter;
+import com.nexr.platform.search.utils.io.AppendRootInputStream;
+import com.nexr.platform.search.utils.io.MapFileWriter;
 
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;

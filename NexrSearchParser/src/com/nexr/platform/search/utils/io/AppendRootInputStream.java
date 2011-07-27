@@ -1,4 +1,4 @@
-package com.nexr.search.platform.parser.io;
+package com.nexr.platform.search.utils.io;
 
 import java.io.*;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.nexr.search.platform.parser;
+package com.nexr.platform.search.parser;
 
 import java.io.*;
 import java.util.regex.Matcher;
