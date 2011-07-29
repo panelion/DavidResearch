@@ -50,8 +50,6 @@ public class SdpXmlGenerator {
 
     private final int idMaxCount;
 
-    private String startTime;
-
     private String prefixTxLog;
 
     private final int startSeqNum = 1;
@@ -104,7 +102,7 @@ public class SdpXmlGenerator {
 
             this.makeDataHeaderData(entity.getDataHeaderEntity(), i, TXID, dateUtils.getAddSecond(1), objectName, methodName, strPayLoad.length());
 
-            if(this.idMaxCount == txNum) txNum++;
+            if(i % this.idMaxCount == 0) txNum++;
 
             /**
              * Body 부분 생성.
@@ -186,7 +184,7 @@ public class SdpXmlGenerator {
 
         } else {
             idMaxCount = 8;
-            xmlRowCount = 1000000;
+            xmlRowCount = 11;
 
             // WAMUI/CSMUI, OCSG, SO, CSM, etc
             moduleType = "CSM";

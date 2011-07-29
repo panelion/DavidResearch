@@ -2,6 +2,7 @@ package com.nexr.platform.search.entity.sdp;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import javax.xml.transform.*;
@@ -35,7 +36,19 @@ public class BaseClass {
 
     protected void setCDATAValue(NodeList nodeList, String value) {
         if(nodeList.getLength() == 1)
-            if(document != null) nodeList.item(0).appendChild((this.document.createCDATASection(value)));
+            if(document != null) {
+                Node node = nodeList.item(0);
+
+                if(node.hasChildNodes()){
+                    NodeList childNodeList = node.getChildNodes();
+                    for(int i = childNodeList.getLength() - 1; i >= 0; i--) {
+                        node.removeChild(childNodeList.item(i));
+                    }
+                }
+
+                node.appendChild(document.createCDATASection(value));
+
+            }
     }
 
     protected String toString(Element element) {
