@@ -1,14 +1,10 @@
 package com.nexr.platform.search.generator;
 
-import com.nexr.platform.search.utils.io.AppendRootInputStream;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
@@ -27,10 +23,9 @@ import java.util.*;
  *
  * Original Xml Data : 798,912 rows.
  */
-public class SdpLogGenerator {
+public class SdpLogGenerator extends AbstractSdpLogGenerator {
 
     private Map<String, String> _mapColumnData;
-    private DocumentBuilderFactory _documentBuilderFactory;
     private Transformer _trans;
     private BufferedWriter _logWriter;
     private final String _ip;
@@ -59,9 +54,6 @@ public class SdpLogGenerator {
         } catch(IOException e){
             throw new IOException("Can't Find SDP Column Define File.");
         }
-
-        _documentBuilderFactory = DocumentBuilderFactory.newInstance();
-
 
         /**
          * 저장 할 파일을 새로 생성 한다.
@@ -168,43 +160,6 @@ public class SdpLogGenerator {
 
             row = null;
         }
-    }
-
-    /**
-     * Document 를 생성 한다.
-     * @return  Document
-     */
-    private Document createDocument() {
-
-        Document document = null;
-        try {
-            DocumentBuilder documentBuilder;
-            documentBuilder = _documentBuilderFactory.newDocumentBuilder();
-            document  = documentBuilder.newDocument();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        }
-
-        return document;
-    }
-
-    /**
-     * String Xml Data 를 Element 형태로 변환 한다.
-     * @param xmlRow    String Xml Data.
-     * @return Element Xml Data Element
-     */
-    private Element getElementByStrXml(String xmlRow) {
-        try {
-            DocumentBuilder documentBuilder = _documentBuilderFactory.newDocumentBuilder();
-            Document readDocument = documentBuilder.parse(AppendRootInputStream.createInputStream(xmlRow));
-
-            return readDocument.getDocumentElement();
-
-        } catch (Exception e) {
-            System.err.println(xmlRow);
-        }
-
-        return null;
     }
 
     /**
@@ -354,6 +309,10 @@ public class SdpLogGenerator {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void start(int count) {
+
     }
 
     /**
