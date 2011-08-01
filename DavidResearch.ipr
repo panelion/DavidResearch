@@ -170,9 +170,9 @@
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/lucene-queries-3.1.0.jar" path-in-jar="/" />
       </root>
     </artifact>
-    <artifact type="jar" name="NexrSearchSdpDataParser">
-      <output-path>$PROJECT_DIR$/out/artifacts/NexrSearchParser</output-path>
-      <root id="archive" name="NexrSearchSdpDataParser.jar">
+    <artifact type="jar" build-on-make="true" name="NexrSearchSdpXmlParser">
+      <output-path>$PROJECT_DIR$/out/artifacts/NexrSearchSdpXmlParser</output-path>
+      <root id="archive" name="NexrSearchSdpXmlParser.jar">
         <element id="directory" name="META-INF">
           <element id="file-copy" path="$PROJECT_DIR$/NexrSearchParser/src/META-INF/MANIFEST.MF" />
         </element>

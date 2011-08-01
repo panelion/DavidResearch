@@ -2,7 +2,6 @@ package com.nexr.platform.search.parser;
 
 import com.nexr.data.sdp.rolling.hdfs.LogRecord;
 import com.nexr.data.sdp.rolling.hdfs.LogRecordKey;
-
 import com.nexr.platform.search.utils.io.AppendRootInputStream;
 import com.nexr.platform.search.utils.io.MapFileWriter;
 
@@ -10,9 +9,8 @@ import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.XMLEvent;
-import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Xml 형태로 된, SDP Data 를 읽어와 Hadoop File System 형식의 LogRecordKey, LogRecord 의 Map 형태로 저장 한다.
@@ -24,28 +22,27 @@ public class SdpDataParser implements DataParser {
 
     private XMLEventReader _xmlEventReader;
     private MapFileWriter _mapFileWriter;
-    private Map<String, String> _mapColumnData;
+    // private Map<String, String> _mapColumnData;
 
     /**
      * Constructor
      * @param mapFilePath       File System 을 저장 할 경로 ( 디렉 토리 )
      * @param xmlFilePath       Xml File 경로
-     * @param columnFilePath    Column Define File Path
      */
-    public SdpDataParser(String mapFilePath, String xmlFilePath, String columnFilePath){
+    public SdpDataParser(String mapFilePath, String xmlFilePath){
 
         File mapFile = new File(mapFilePath);
         if(!mapFile.isDirectory()) mapFile.mkdirs();
 
         _mapFileWriter = new MapFileWriter(mapFilePath);
-        _mapColumnData = new HashMap<String, String>();
+        // _mapColumnData = new HashMap<String, String>();
 
         try {
             XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
             _xmlEventReader = xmlInputFactory.createXMLEventReader(AppendRootInputStream.createInputStream(xmlFilePath, "root"));
 
             _mapFileWriter.open();
-            this.loadColumnFile(columnFilePath);
+            // this.loadColumnFile(columnFilePath);
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -59,7 +56,7 @@ public class SdpDataParser implements DataParser {
      * @param columnFilePath    Column Define File Path
      * @throws IOException      Column File Load Error
      */
-    private void loadColumnFile(String columnFilePath) throws IOException {
+    /*private void loadColumnFile(String columnFilePath) throws IOException {
         File file = new File(columnFilePath);
         String _ENCODING = "UTF-8";
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), _ENCODING));
@@ -71,7 +68,7 @@ public class SdpDataParser implements DataParser {
                 if(cols.length > 1) _mapColumnData.put(cols[0], cols[1]);
             }
         }
-    }
+    }*/
 
     /**
      * 시작
@@ -82,7 +79,7 @@ public class SdpDataParser implements DataParser {
 
         int i = 0;
 
-        String firstKey = "TransactionLog";
+        String firstKey = "TXLG";
 
         try {
             while(this._xmlEventReader.hasNext()){
@@ -123,9 +120,9 @@ public class SdpDataParser implements DataParser {
      * 컬럼의 각 부분 대표 명칭에 대한 Enum
      */
     private enum COLUMN_LIST{
-        SystemHeader,
-        DataHeader,
-        Body
+        SHD,
+        DHD,
+        BD
     }
 
     /**
@@ -197,12 +194,8 @@ public class SdpDataParser implements DataParser {
                 if(event.asEndElement().getName().getLocalPart().equals(closedColumnName)){
                     parseBool = false;
                 } else {
-                    if(_mapColumnData.containsKey(key)) {
-                        key = _mapColumnData.get(key);
-                        logRecord.add(key, value);
-                    } else {
-                        System.out.println("[ERROR CODE] : " + key + " + " + value);
-                    }
+
+                    logRecord.add(key, value.trim());
 
                     key = keyValue + _SEPARATOR;
                     value = "";
@@ -214,20 +207,24 @@ public class SdpDataParser implements DataParser {
 
     public static void main(String[] args) throws XMLStreamException, IOException {
 
-        String mapFilePath, xmlFilePath, columnFilePath;
+        String mapFilePath, xmlFilePath;
         if(args.length > 0) {
 
             mapFilePath = args[0];
             xmlFilePath = args[1];
-            columnFilePath = args[2];
+            // columnFilePath = args[2];
 
         } else {
             mapFilePath = "/home/david/Data/SearchPlatform/SDP/hdfs/";
-            xmlFilePath = "/home/david/Data/SearchPlatform/SDP/sdpXmlData.xml";
-            columnFilePath = "/home/david/Data/SearchPlatform/SDP/SdpColumnDefine.txt";
+            xmlFilePath = "/home/david/Data/SearchPlatform/SDP/generateParseData.log";
+            // columnFilePath = "/home/david/Data/SearchPlatform/SDP/SdpColumnDefine.txt";
         }
 
-        SdpDataParser xmlParser = new SdpDataParser(mapFilePath, xmlFilePath, columnFilePath);
+        System.out.println("***************************************************************************");
+        System.out.println("[START MAKE FILE SYSTEM DATA.]");
+        System.out.println("***************************************************************************");
+
+        SdpDataParser xmlParser = new SdpDataParser(mapFilePath, xmlFilePath);
         xmlParser.start();
         xmlParser.close();
     }
