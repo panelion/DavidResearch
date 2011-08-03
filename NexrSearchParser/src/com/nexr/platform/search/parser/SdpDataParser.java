@@ -215,8 +215,8 @@ public class SdpDataParser implements DataParser {
             // columnFilePath = args[2];
 
         } else {
-            mapFilePath = "/home/david/Data/SearchPlatform/SDP/hdfs/";
-            xmlFilePath = "/home/david/Data/SearchPlatform/SDP/generateParseData.log";
+            mapFilePath = "/Users/david/Data/hdfs/";
+            xmlFilePath = "/Users/david/Data/generateParseData.log";
             // columnFilePath = "/home/david/Data/SearchPlatform/SDP/SdpColumnDefine.txt";
         }
 

@@ -40,12 +40,23 @@ public class DateUtils {
     }
 
     /**
-     * 세팅 된 Date 에 달을 더하 거나 뺀다.
+     * 세팅 된 Date 에 초를 더하 거나 뺀다.
      * @param intSecond  더하 거나 뺄 초의 수.
      * @return  초를 더하 거나 뺀 날짜.
      */
     public String getAddSecond(int intSecond){
         _calendar.add(Calendar.SECOND , intSecond);
+        _date = _calendar.getTime();
+        return _simpleDateFormat.format(_date);
+    }
+
+    /**
+     * 세팅 된 Date 에 밀리 세컨드 단위를 더하 거나 뺀다.
+     * @param intMillisecond
+     * @return
+     */
+    public String getAddMillisecond(int intMillisecond) {
+        _calendar.add(Calendar.MILLISECOND, intMillisecond);
         _date = _calendar.getTime();
         return _simpleDateFormat.format(_date);
     }

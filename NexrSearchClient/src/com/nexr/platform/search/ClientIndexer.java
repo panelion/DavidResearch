@@ -87,18 +87,18 @@ public class ClientIndexer implements DataConsumer<RoutingEvent> {
             /**
              * SDP Config in Mac Book.
              */
-            /*confFilePath = "/Users/panelion/IdeaProject/DavidResearch/NexrSearchClient/config/properties/SdpClient.conf";
-            dataFilePath = "/Users/panelion/Data/SearchPlatform/SDP/hdfs/data";
-            logFilePath = "/Users/panelion/IdeaProject/DavidResearch/NexrSearchClient/logs/test.log";
-            isCdr = false;*/
+            confFilePath = "/Users/david/IdeaProjects/DavidResearch/NexrSearchClient/config/properties/SdpClient.conf";
+            dataFilePath = "/Users/david/Data/hdfs/data";
+            logFilePath = "/Users/david/IdeaProjects/DavidResearch/NexrSearchClient/logs/test.log";
+            isCdr = false;
 
             /**
              * SDP Config in Linux.
              */
-            confFilePath = "/home/david/IdeaProjects/DavidResearch/NexrSearchClient/config/properties/SdpClient.conf";
+            /*confFilePath = "/home/david/IdeaProjects/DavidResearch/NexrSearchClient/config/properties/SdpClient.conf";
             dataFilePath = "/home/david/Data/SearchPlatform/SDP/hdfs/data";
             logFilePath = "/home/david/IdeaProjects/DavidResearch/NexrSearchClient/logs/test.log";
-            isCdr = false;
+            isCdr = false;*/
 
             /* CDR Config */
             /*confFilePath = "/home/david/IdeaProjects/DavidResearch/NexrSearchClient/config/properties/CdrClient.conf";

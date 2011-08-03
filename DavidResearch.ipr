@@ -33,7 +33,6 @@
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/commons-net-1.4.1.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/core-3.1.1.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/elasticsearch-0.16.2.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/flume-core-0.9.4-20110607.083606-2.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/guava-r07.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/hadoop-core-0.20.2.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/hsqldb-1.8.0.10.jar" path-in-jar="/" />
@@ -75,7 +74,6 @@
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/zookeeper-3.3.3.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/slf4j-log4j12-1.6.1.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/lucene-highlighter-3.1.0.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/zkclient-1.0.0.1000-b-SNAPSHOT.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/router-1.0.0.1000-b1-SNAPSHOT.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/slf4j-api-1.6.1.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/lucene-memory-3.1.0.jar" path-in-jar="/" />
@@ -84,9 +82,11 @@
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/core-1.0.0.1000-b1-SNAPSHOT.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/lucene-queries-3.1.0.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/plugins/nexr/core-1.0.0.1000-b1-SNAPSHOT.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/plugins/nexr/client-1.0.0.1000-b1-SNAPSHOT.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/plugins/nexr/router-1.0.0.1000-b1-SNAPSHOT.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/plugins/nexr/plugin-1.0.0.1000-b1-SNAPSHOT.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/flume-core-0.9.4-SNAPSHOT.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/zkclient-1.0.0.1000-b2.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/plugins/nexr/client-0.1-SNAPSHOT.jar" path-in-jar="/" />
       </root>
     </artifact>
     <artifact type="jar" name="NexrSearchCdrDataParser">
@@ -199,7 +199,6 @@
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/commons-net-1.4.1.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/core-3.1.1.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/elasticsearch-0.16.2.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/flume-core-0.9.4-20110607.083606-2.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/guava-r07.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/hadoop-core-0.20.2.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/hsqldb-1.8.0.10.jar" path-in-jar="/" />
@@ -249,9 +248,10 @@
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/lucene-analyzers-3.1.0.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/core-1.0.0.1000-b1-SNAPSHOT.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/lucene-queries-3.1.0.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR/distribution/target/nexr-search-0.1-SNAPSHOT-bin/lib/flume-core-0.9.4-SNAPSHOT.jar" path-in-jar="/" />
       </root>
     </artifact>
-    <artifact type="jar" name="NexrSearchLogGenerator">
+    <artifact type="jar" build-on-make="true" name="NexrSearchLogGenerator">
       <output-path>$PROJECT_DIR$/out/artifacts/NexrSearchLogGenerator</output-path>
       <root id="archive" name="NexrSearchLogGenerator.jar">
         <element id="directory" name="META-INF">

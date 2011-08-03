@@ -98,11 +98,11 @@ public class SdpXmlGenerator {
              * Data Header 부분 생성.
              */
             String TXID = prefixTxLog + String.format("%09d", txNum);
-            String objectName = this.objectNames[i % objectNames.length];
-            String methodName = this.methodNames[i % methodNames.length];
+            String objectName = this.objectNames[txNum % objectNames.length];
+            String methodName = this.methodNames[txNum % methodNames.length];
             String strPayLoad = entity.generateCData(methodName, objectName, TXID);
 
-            this.makeDataHeaderData(entity.getDataHeaderEntity(), i, TXID, dateUtils.getAddSecond(1), objectName, methodName, strPayLoad.length());
+            this.makeDataHeaderData(entity.getDataHeaderEntity(), i, TXID, dateUtils.getAddMillisecond(500), objectName, methodName, strPayLoad.length());
 
             if(i % this.seqMaxCount == 0) txNum++;
 
@@ -198,7 +198,7 @@ public class SdpXmlGenerator {
         } else {
             userCount = 100;
             seqMaxCount = 8;
-            xmlRowCount = 1000000;
+            xmlRowCount = 10;
 
             // WAMUI/CSMUI, OCSG, SO, CSM, etc
             moduleType = "CSM";
@@ -208,7 +208,7 @@ public class SdpXmlGenerator {
 
             // IN_RES, OUT_RES, IN_REQ, OUT_REQ
             logRecordType = "IN_RES";
-            saveFilePath = "/Users/Panelion/Data/generateParseData.log";
+            saveFilePath = "/Users/david/Data/generateParseData.log";
         }
 
         long startTime = System.currentTimeMillis();

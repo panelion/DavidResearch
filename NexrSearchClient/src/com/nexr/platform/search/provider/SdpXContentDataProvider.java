@@ -71,7 +71,7 @@ public class SdpXContentDataProvider extends StreamDataProvider<RoutingEvent> {
                 // event.setIndex();
 
                 for(String field : logRecord.getFields()){
-                    event.put(field.toLowerCase(), logRecord.getValue(field).trim());
+                    event.put(field,logRecord.getValue(field).trim());
                 }
 
             } else {
