@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class CdrDataParser {
 
-    private final String _ENCODING = "EUC-KR";
+    private final String _ENCODING = "UTF-8";
 
     private final String _columnFilePath;
     private final String _dataFilePath;
@@ -67,9 +67,9 @@ public class CdrDataParser {
             String _SEPARATOR = ",";
             String[] cols = row.split(_SEPARATOR);
 
-            for(int i = 0 ; i < cols.length ; i++) {
+            /*for(int i = 0 ; i < cols.length ; i++) {
                 logRecord.add(_arrColumnData.get(i), cols[i]);
-            }
+            }*/
 
             for(int i = 0 ; i < _arrColumnData.size(); i++){
                 String col;
@@ -100,9 +100,9 @@ public class CdrDataParser {
             columnFilePath = args[1];
             dataFilePath = args[2];
         } else {
-            mapFilePath = "/home/david/Data/SearchPlatform/CDR/hdfs/";
-            columnFilePath = "/home/david/Data/SearchPlatform/CDR/real_key.txt";
-            dataFilePath = "/home/david/Data/SearchPlatform/CDR/data.dat";
+            mapFilePath = "/Users/david/Data/SearchPlatform/CDR/hdfs/";
+            columnFilePath = "/Users/david/Data/SearchPlatform/CDR/cdr_column.csv";
+            dataFilePath = "/Users/david/Data/SearchPlatform/CDR/cdr_sample_data";
 
         }
 
