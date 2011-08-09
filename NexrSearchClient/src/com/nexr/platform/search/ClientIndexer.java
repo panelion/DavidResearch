@@ -55,11 +55,15 @@ public class ClientIndexer implements DataConsumer<RoutingEvent> {
         if((data != null) && (data.size() > 0)) {
             for(DataEvent<RoutingEvent> route : data) {
                 try{
-                _router.route(route.getData());
-                _consumeCount++;
-
-                } catch(RoutingException e){
-                    e.printStackTrace();
+                    _router.route(route.getData());
+                    _consumeCount++;
+                } catch(Exception e){
+                    try {
+                        _router.route(route.getData());
+                        _consumeCount++;
+                    }catch(Exception e2){
+                        e2.printStackTrace();
+                    }
                 }
             }
         }
@@ -87,10 +91,10 @@ public class ClientIndexer implements DataConsumer<RoutingEvent> {
             /**
              * SDP Config in Mac Book.
              */
-            confFilePath = "/Users/david/IdeaProjects/DavidResearch/NexrSearchClient/config/properties/SdpClient.conf";
-            dataFilePath = "/Users/david/Data/hdfs/data";
+            /*confFilePath = "/Users/david/IdeaProjects/DavidResearch/NexrSearchClient/config/properties/SdpClient.conf";
+            dataFilePath = "/Users/david/Data/SearchPlatform/SDP/hdfs/data";
             logFilePath = "/Users/david/IdeaProjects/DavidResearch/NexrSearchClient/logs/test.log";
-            isCdr = false;
+            isCdr = false;*/
 
             /**
              * SDP Config in Linux.
@@ -101,10 +105,10 @@ public class ClientIndexer implements DataConsumer<RoutingEvent> {
             isCdr = false;*/
 
             /* CDR Config */
-            /*confFilePath = "/home/david/IdeaProjects/DavidResearch/NexrSearchClient/config/properties/CdrClient.conf";
-            dataFilePath = "/home/david/Data/SearchPlatform/CDR/hdfs/data";
-            logFilePath = "/home/david/IdeaProjects/DavidResearch/NexrSearchClient/logs/test.log";
-            isCdr = true;*/
+            confFilePath = "/Users/david/IdeaProjects/DavidResearch/NexrSearchClient/config/properties/CdrClient.conf";
+            dataFilePath = "/Users/david/Data/SearchPlatform/CDR/hdfs/data";
+            logFilePath = "/Users/david/IdeaProjects/DavidResearch/NexrSearchClient/logs/cdrIndexing.log";
+            isCdr = true;
         }
 
         /**

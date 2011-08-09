@@ -13,7 +13,7 @@
 			    "uppercase" : {},
 				"selection" : {"defined":true }
 			},
-			"nexr.timestamp" : "TS",
+			"nexr.timestamp" : "TXLG.DHD.TS",
             "nexr.timestamp.format" : "yyyy-MM-dd HH:mm:ss.SSS"
 		},
 		"properties" : {

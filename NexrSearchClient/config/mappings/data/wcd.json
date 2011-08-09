@@ -4,188 +4,192 @@
 		"_source" : {"enabled" : false},
 		"_type" : {"index" : "no"},
 
+		"_routing" : 	{
+					"required" : true,
+					"path" : "I_CTN"
+				},
+		"_meta" : {
+			"nexr.filters" : {
+				"selection" : {"defined":true }
+			}
+		},
+
 		"properties" : {
+		    "I_CTN" : {
+		        "type" : "string",
+				"store" : "yes"
+		    },
+		    "U_CELL" : {
+		        "type" : "string",
+				"store" : "yes"
+		    },
+		    "SECTOR" : {
+		        "type" : "string",
+				"store" : "yes"
+		    },
 			"I_ETL_DT" : {
-				"type" : "long", 
-				"store" : "yes", 
-				"null_value" : "0", 
-				"index" : "analyzed"
+				"type" : "date",
+				"format" : "yy/MM/dd",
+				"store" : "yes"
 			},
 			"I_CALL_DT" : {
-				"type" : "long", 
-				"store" : "yes", 
-				"null_value" : "0",  
-				"index" : "analyzed"
+				"type" : "date",
+				"format" : "yy/MM/dd",
+				"store" : "yes"
 			},
 			"I_INOUT" : {
 				"type" : "string", 
-				"store" : "yes", 
-				"index" : "analyzed"
+				"store" : "yes"
 			},
 			"I_OUT_CTN" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "analyzed"
+				"store" : "yes"
 			},
 			"I_OUT_CC" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes"
 			},
 			"I_IN_CTN" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "analyzed"
+				"store" : "yes"
 			},
 			"I_IN_CC" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes" 
 			},
+
 			"I_HLR" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes"
 			},
 			"I_BONBU" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes"
 			},
 			"I_CALLING_SWITCH" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "analyzed"
+				"store" : "yes"
 			},
 			"I_CALLED_SWITCH" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "analyzed"
+				"store" : "yes"
 			},
 			"I_BSC" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "analyzed"
+				"store" : "yes"
 			},
 			"I_CELL" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "analyzed"
+				"store" : "yes" 
 			},
 			"I_SECTOR" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes" 
+				
 			},
 			"I_IN_ROUTE" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes" 
 			},
 			"I_OUT_ROUTE" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes" 
 			},
 			"I_PORTABIL_NO" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes" 
 			},
 			"I_PORTABIL_ORG" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes" 
 			},
 			"I_SUBSCRIBER_TYPE" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes" 
 			},
 			"I_SERVICE_GRP" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes" 
 			},
 			"I_SERVICE" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes" 
+				
 			},
 			"I_CFC_GRP" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "analyzed"
+				"store" : "yes" 
+				
 			},
 			"I_CFC" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes" 
+				
 			},
 			"I_CFC_TYPE" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes" 
+				
 			},
 			"I_NET_CLS" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes" 
+				
 			},
 			"I_PREFIX" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes" 
+				
 			},
 			"AMT_CALL" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes" 
+				
 			},
 			"AMT_PDD_CALL" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes" 
+				
 			},
 			"I_PRICEPLAN" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "analyzed"
+				"store" : "yes" 
+				
 			},
 			"I_TARGET_ORG" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes" 
+				
 			},
 			"I_BASIC_SERVICE" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes" 
+				
 			},
 			"I_DURATION" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes" 
+				
 			},
 			"I_MNP_2" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes" 
+				
 			},
 			"I_WCDMA_FCI" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes" 
+				
 			},
 			"I_MODEL" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "analyzed"
+				"store" : "yes" 
+				
 			},
 			"I_RELEASE_TIME" : { 
 				"type" : "string",
-				"store" : "yes", 
-				"index" : "not_analyzed"
+				"store" : "yes" 
+				
 			}
 		}
 	}
