@@ -3,16 +3,14 @@ package com.nexr.platform.search.parser;
 import com.nexr.data.sdp.rolling.hdfs.LogRecord;
 import com.nexr.data.sdp.rolling.hdfs.LogRecordKey;
 import com.nexr.platform.search.utils.io.MapFileWriter;
-import com.sun.jersey.core.util.StringIgnoreCaseKeyComparator;
-import org.elasticsearch.common.*;
-import sun.java2d.pipe.SpanShapeRenderer;
+import org.elasticsearch.common.UUID;
 
-import javax.sql.RowSet;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.logging.Level;
+
+import static java.util.Collections.addAll;
 
 /**
  * CSV 타입 으로 된 CDR 데이터 를 파싱 하여, Hadoop FileSystem 에 LogRecordKey, LogRecord 의 Map 형태로 저장 한다.
@@ -96,16 +94,13 @@ public class CdrDataParser {
                     String[] rows;
                     if(rowCount == 0) {
                         rows = row.split(SEPARATOR);
-                        for(String str : rows) {
-                            columnDefine.add(str);
-                        }
+                        addAll(columnDefine, rows);
                     } else {
                         rows = row.split(SEPARATOR, columnDefine.size());
                         for(int i = 0; i < columnDefine.size(); i++) {
                             try {
                                 map.put(columnDefine.get(i), rows[i] == null ? "" : rows[i]);
                             } catch(Exception e) {
-                                System.err.println(i + " " + columnDefine.get(i));
                                 map.put(columnDefine.get(i), "");
                             }
                         }
@@ -141,7 +136,7 @@ public class CdrDataParser {
                 if(!row.isEmpty()) {
                     String[] rows = row.trim().split(SEPARATOR);
                     if(rowCount == 0) {
-                        for(String str : rows) columnDefine.add(str);
+                        addAll(columnDefine, rows);
                     } else {
                         for(int i = 0; i < columnDefine.size(); i++) {
                             map.put(columnDefine.get(i), rows[i] == null ? "" : rows[i]);
@@ -218,9 +213,8 @@ public class CdrDataParser {
              */
             String sectorVal = logRecord.getValue("I_SECTOR");
             String sector = "-";
-            for(int j=0; j < _mapComSec.size(); j++) {
-                Map<String, String> map = _mapComSec.get(j);
-                if(map.get("I_SEC").equals(sectorVal)) {
+            for (Map<String, String> map : _mapComSec) {
+                if (map.get("I_SEC").equals(sectorVal)) {
                     sector = map.get("T_SEC");
                 }
             }
@@ -268,7 +262,7 @@ public class CdrDataParser {
 
             LogRecordKey logRecordKey = new LogRecordKey();
 
-            logRecordKey.setLogId(org.elasticsearch.common.UUID.randomBase64UUID().toString());
+            logRecordKey.setLogId(UUID.randomBase64UUID());
 
             try {
                 logRecordKey.setTime(LogRecordKey.formatter.format(format.parse(logRecord.getValue("I_RELEASE_TIME") + "00")));
