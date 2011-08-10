@@ -4,6 +4,7 @@ import com.nexr.data.sdp.rolling.hdfs.LogRecord;
 import com.nexr.data.sdp.rolling.hdfs.LogRecordKey;
 import com.nexr.platform.search.utils.io.MapFileWriter;
 import com.sun.jersey.core.util.StringIgnoreCaseKeyComparator;
+import org.elasticsearch.common.*;
 import sun.java2d.pipe.SpanShapeRenderer;
 
 import javax.sql.RowSet;
@@ -267,13 +268,14 @@ public class CdrDataParser {
 
             LogRecordKey logRecordKey = new LogRecordKey();
 
-            logRecordKey.setLogId(String.format("%09d", dataCount++));
-            //call dt -> yy/MM/dd -> yyyymmdd
+            logRecordKey.setLogId(org.elasticsearch.common.UUID.randomBase64UUID().toString());
+
             try {
                 logRecordKey.setTime(LogRecordKey.formatter.format(format.parse(logRecord.getValue("I_RELEASE_TIME") + "00")));
             } catch (ParseException e) {
                 continue;
             }
+
             logRecordKey.setDataType(logRecord.getValue("I_SERVICE"));
 
 
@@ -305,7 +307,7 @@ public class CdrDataParser {
 
         } else {
 
-            mapFilePath = "/Users/david/Data/SearchPlatform/CDR/hdfs/";
+            mapFilePath = "/Users/david/Execute/elasticsearch_client/data/cdr/hdfs";
             columnFilePath = "/Users/david/Execute/elasticsearch_client/data/cdr/cdr_column.csv";
             dataFilePath = "/Users/david/Data/SearchPlatform/CDR/srf_wcd_voice_1_2.csv";
 
