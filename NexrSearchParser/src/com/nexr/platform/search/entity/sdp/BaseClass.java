@@ -63,7 +63,7 @@ public class BaseClass {
     }
 
 
-    public String generateCData(String methodName, String objectName, String TXID) {
+    public static String generateCData(String methodName, String objectName, String TXID) {
         StringBuffer sb = new StringBuffer();
         sb.append("End of Flow ");
         sb.append(methodName);
