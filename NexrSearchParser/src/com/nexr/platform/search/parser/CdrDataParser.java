@@ -2,8 +2,8 @@ package com.nexr.platform.search.parser;
 
 import com.nexr.data.sdp.rolling.hdfs.LogRecord;
 import com.nexr.data.sdp.rolling.hdfs.LogRecordKey;
+import com.nexr.platform.search.utils.DateUtils;
 import com.nexr.platform.search.utils.io.MapFileWriter;
-import org.elasticsearch.common.UUID;
 
 import java.io.*;
 import java.text.ParseException;
@@ -28,7 +28,9 @@ public class CdrDataParser {
     private Map<SCKey, Map<String, String>> _mapComCell;
     private ArrayList<Map<String, String>> _mapComSec;
 
-    public CdrDataParser(String mapFilePath, String columnFilePath, String dataFilePath){
+    private final String prefixLogId;
+
+    public CdrDataParser(String mapFilePath, String columnFilePath, String dataFilePath, String ip){
         _columnFilePath = columnFilePath;
         _dataFilePath = dataFilePath;
 
@@ -41,6 +43,9 @@ public class CdrDataParser {
         } catch(Exception e){
             e.printStackTrace();
         }
+
+        DateUtils dateUtils = new DateUtils("yyyyMMddHHmmss");
+        prefixLogId = ip.replaceAll(".", "-") + "-" + dateUtils.getCurrentTime() + "-";
     }
 
     public void load_sd_com_cell(String filePath) throws IOException {
@@ -262,7 +267,8 @@ public class CdrDataParser {
 
             LogRecordKey logRecordKey = new LogRecordKey();
 
-            logRecordKey.setLogId(UUID.randomBase64UUID());
+            String logId = prefixLogId + String.format("%9d", dataCount);
+            logRecordKey.setLogId(logId);
 
             try {
                 logRecordKey.setTime(LogRecordKey.formatter.format(format.parse(logRecord.getValue("I_RELEASE_TIME") + "00")));
@@ -272,10 +278,11 @@ public class CdrDataParser {
 
             logRecordKey.setDataType(logRecord.getValue("I_SERVICE"));
 
-
             _mapFileWriter.getMapFileWriter().append(logRecordKey, logRecord);
 
             if(dataCount % 10000 == 0) System.out.println(dataCount);
+
+            dataCount++;
         }
     }
 
@@ -289,7 +296,7 @@ public class CdrDataParser {
 
     public static void main(String[] args){
 
-        String mapFilePath, columnFilePath, dataFilePath, sdComCellFilePath, sdComSecFilePath;
+        String mapFilePath, columnFilePath, dataFilePath, sdComCellFilePath, sdComSecFilePath, ip;
 
         if(args.length > 0){
 
@@ -298,6 +305,7 @@ public class CdrDataParser {
             dataFilePath = args[2];
             sdComCellFilePath = args[3];
             sdComSecFilePath = args[4];
+            ip = args[5];
 
         } else {
 
@@ -307,11 +315,12 @@ public class CdrDataParser {
 
             sdComCellFilePath = "/Users/david/Execute/elasticsearch_client/data/cdr/sd_com_cell.txt";
             sdComSecFilePath = "/Users/david/Execute/elasticsearch_client/data/cdr/sd_com_sec.txt";
+            ip = "127.0.0.1";
 
         }
 
         try{
-            CdrDataParser parser = new CdrDataParser(mapFilePath, columnFilePath, dataFilePath);
+            CdrDataParser parser = new CdrDataParser(mapFilePath, columnFilePath, dataFilePath, ip);
             parser.load_sd_com_cell(sdComCellFilePath);
             parser.load_sd_com_sec(sdComSecFilePath);
             parser.start();
