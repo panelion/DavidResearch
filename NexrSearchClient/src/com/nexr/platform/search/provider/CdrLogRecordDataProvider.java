@@ -110,22 +110,24 @@ public class CdrLogRecordDataProvider extends StreamDataProvider<RoutingEvent> {
             int rowCount = 0;
 
             ArrayList<String> columnDefine = new ArrayList<String>();
-            Map<String, String> map = new HashMap<String, String>();
-
+            Map<String, String> map;
             while((row = reader.readLine()) != null) {
+                row = row.trim();
                 if(!row.isEmpty()) {
-                    String[] rows = row.trim().split(SEPARATOR);
+                    map = new HashMap<String, String>();
+                    String[] rows = row.split(SEPARATOR);
+
                     if(rowCount == 0) {
                         addAll(columnDefine, rows);
                     } else {
                         for(int i = 0; i < columnDefine.size(); i++) {
-                            map.put(columnDefine.get(i), rows[i] == null ? "" : rows[i]);
+                            map.put(columnDefine.get(i), ValidateUtils.getValidValue(rows[i]));
                         }
-                    }
 
-                    list.add(map);
+                        list.add(map);
+                    }
+                    rowCount++;
                 }
-                rowCount++;
             }
         }
         return list;
@@ -199,14 +201,19 @@ public class CdrLogRecordDataProvider extends StreamDataProvider<RoutingEvent> {
             return null;
         }
 
+        if(row == null) {
+            return null;
+        }
+
+        row = row.trim();
+
         if(row.isEmpty()) {
             return null;
         }
 
         String[] cols = row.split(",", _arrColumnData.size());
 
-        String key;
-        String col;
+        String key, col;
         for(int i = 0 ; i < _arrColumnData.size(); i++){
             key = _arrColumnData.get(i);
             try {

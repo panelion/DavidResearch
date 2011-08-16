@@ -97,8 +97,7 @@ public abstract class StreamDataProvider<V> implements DataProvider<V> {
                     }
                 } else {
                     flush();
-
-                    this.interrupt();
+                    // this.interrupt();
                     System.exit(0);
                 }
             }

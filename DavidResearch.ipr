@@ -88,6 +88,7 @@
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR_DEV/distribution/target/nexr-search-0.1-SNAPSHOT-bin/plugins/nexr/core-1.0.0.1000-b1-SNAPSHOT.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR_DEV/distribution/target/nexr-search-0.1-SNAPSHOT-bin/plugins/nexr/plugin-1.0.0.1000-b1-SNAPSHOT.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/../DPSR_DEV/distribution/target/nexr-search-0.1-SNAPSHOT-bin/plugins/nexr/router-1.0.0.1000-b1-SNAPSHOT.jar" path-in-jar="/" />
+        <element id="module-output" name="DavidUtils" />
       </root>
     </artifact>
     <artifact type="jar" name="NexrSearchSdpXmlParser">

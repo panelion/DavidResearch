@@ -127,7 +127,8 @@ public class ClientIndexer implements DataConsumer<RoutingEvent> {
              */
             confFilePath = "/Users/david/IdeaProjects/DavidResearch/NexrSearchClient/config/properties/CdrClient.conf";
             columnFilePath = "/Users/david/Execute/nexrsearch_client/config/wcd_column.txt";
-            dataFilePath = "/Users/david/Execute/Data/SearchPlatform/CDR/srf_wcd_voice_1_2.csv";
+            // dataFilePath = "/Users/david/Execute/Data/SearchPlatform/CDR/srf_wcd_voice_1_2.csv";
+            dataFilePath = "/Users/david/Execute/Data/SearchPlatform/CDR/sample_wcd_voice.csv";
 
             sdComCellFilePath = "/Users/david/Execute/nexrsearch_client/config/sd_com_cell.txt";
             sdComSecFilePath = "/Users/david/Execute/nexrsearch_client/config/sd_com_sec.txt";
