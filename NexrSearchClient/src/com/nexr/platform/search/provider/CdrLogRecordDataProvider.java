@@ -244,9 +244,9 @@ public class CdrLogRecordDataProvider extends StreamDataProvider<RoutingEvent> {
         String i_inout = mapData.get("I_INOUT");
         String i_ctn = "";
         if(i_inout.equals("0")) {
-            i_ctn = mapData.get("I_IN_CTN");
-        } else if(i_inout.equals("1")) {
             i_ctn = mapData.get("I_OUT_CTN");
+        } else if(i_inout.equals("1")) {
+            i_ctn = mapData.get("I_IN_CTN");
         }
 
         mapData.put("I_CTN", i_ctn);
@@ -278,6 +278,7 @@ public class CdrLogRecordDataProvider extends StreamDataProvider<RoutingEvent> {
         event.put("U_CELL", u_cell);
 
         event.setId(_prefixLogId + String.format("%09d", _produceCount));
+
         try {
             SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmssSSS");
             event.setTimeStamp(format.parse(mapData.get("I_RELEASE_TIME") + "00").getTime());

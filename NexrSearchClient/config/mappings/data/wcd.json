@@ -50,7 +50,7 @@
             "I_OUT_CTN" : {
                 "type" : "string",
                 "store" : "yes",
-                "index" : "no"
+                "index" : "not_analyzed"
             },
             "I_OUT_CC" : {
                 "type" : "string",
@@ -60,7 +60,7 @@
             "I_IN_CTN" : {
                 "type" : "string",
                 "store" : "yes",
-                "index" : "no"
+                "index" : "not_analyzed"
             },
             "I_IN_CC" : {
                 "type" : "string",
