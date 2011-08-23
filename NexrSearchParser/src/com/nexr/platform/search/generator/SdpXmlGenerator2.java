@@ -45,7 +45,7 @@ public class SdpXmlGenerator2 {
         this.maxTransInterval = maxTransInterval;
     }
 
-    public void generate(String saveFilePath, int transactionCount) throws ParserConfigurationException, IOException {
+    public void generate(String saveFilePath, int transactionCount, String moduleType, String serverName, String serverIP, String logType) throws ParserConfigurationException, IOException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         prefixTxLog = prefixTxLog + "-" + dateFormat.format(new Date(System.currentTimeMillis())) + "-";
 
@@ -56,7 +56,7 @@ public class SdpXmlGenerator2 {
         Random rnd = new Random(System.currentTimeMillis());
 
         TransactionWriter transWriter;
-        transWriter = new TransactionWriter(idMaxCount, startSeqNum, endSeqNum, seqMaxCount, saveFilePath);
+        transWriter = new TransactionWriter(moduleType, serverName, serverIP, logType, saveFilePath);
         transWriter.open();
 
         for (int transNum=0; transNum<transactionCount; transNum++) {
@@ -83,6 +83,10 @@ public class SdpXmlGenerator2 {
         int userCount, seqMaxCount, transactionCount;
         String dateString;
         String saveFilePath;
+        String moduleType;
+        String serverName;
+        String serverIP;
+        String logType;
         long logStartTime;
         long maxTransTime;
         long maxTransInterval;
@@ -96,11 +100,14 @@ public class SdpXmlGenerator2 {
             seqMaxCount = Integer.parseInt(args[1]);
             transactionCount = Integer.parseInt(args[2]);
             dateString = args[3];
-            logStartTime =  dateFormat.parse(args[3]).getTime();
             maxTransTime = Long.parseLong(args[4]);
             maxTransInterval = Long.parseLong(args[5]);
+            moduleType = args[6];
+            serverName = args[7];
+            serverIP = args[8];
+            logType = args[9];
 
-            saveFilePath = args[6];
+            saveFilePath = args[10];
 
         } else {
             userCount = 100;
@@ -113,10 +120,14 @@ public class SdpXmlGenerator2 {
             maxTransTime = 60000;
             // 시험상으로 transactionCount*maxTransInterval/2 정도의 기간으로 transaction 이 생성
             maxTransInterval = 5000;
-            saveFilePath = "/Users/hcnah/Workspace/Data/generateParseData.log";
+            moduleType = FieldData.moduleTypes[0];
+            serverName = FieldData.serverNames[0];
+            serverIP = FieldData.serverIPs[0];
+            logType = FieldData.logTypes[0];
+            saveFilePath = "/data/SDP/generateParseData.log";
         }
 
-        dateString += " 00:00:00.000";
+        dateString = dateString.trim() + " 00:00:00.000";
         logStartTime =  dateFormat.parse(dateString).getTime();
 
         long startTime = System.currentTimeMillis();
@@ -136,7 +147,7 @@ public class SdpXmlGenerator2 {
         logger.info("* Start generating log...");
 
         SdpXmlGenerator2 sdpXmlGenerator = new SdpXmlGenerator2(userCount, seqMaxCount, logStartTime, maxTransTime, maxTransInterval);
-        sdpXmlGenerator.generate(saveFilePath, transactionCount);
+        sdpXmlGenerator.generate(saveFilePath, transactionCount, moduleType, serverName, serverIP, logType);
 
         long endTime = System.currentTimeMillis();
         logger.info("..finished.");
@@ -147,20 +158,21 @@ public class SdpXmlGenerator2 {
     }
 
     public static class TransactionWriter {
-        private int userCount;
-        private int startSeqNum;
-        private int endSeqNum;
-        private int seqCount;
         private FileUtils fileUtil;
         private XmlUtils xmlUtils;
 
+        private String moduleType;
+        private String serverName;
+        private String serverIP;
+        private String logType;
+
         private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
-        public TransactionWriter(int userCount, int startSeqNum, int endSeqNum, int seqCount, String logPath) throws IOException, ParserConfigurationException {
-            this.userCount = userCount;
-            this.startSeqNum = startSeqNum;
-            this.endSeqNum = endSeqNum;
-            this.seqCount = seqCount;
+        public TransactionWriter(String moduleType, String serverName, String serverIP, String logType, String logPath) throws IOException, ParserConfigurationException {
+            this.moduleType = moduleType;
+            this.serverName = serverName;
+            this.serverIP = serverIP;
+            this.logType = logType;
 
             fileUtil = new FileUtils(logPath);
             xmlUtils = new XmlUtils();
@@ -201,7 +213,7 @@ public class SdpXmlGenerator2 {
             for (Transaction eachTrans : transList) {
                 List<TransactionSequence> sequenceList = eachTrans.getSequenceList();
                 for (TransactionSequence eachSequence : sequenceList) {
-                    if (eachSequence.getTimestamp() < time) {
+                    if (eachSequence.getTimestamp() < time && eachSequence.getUsed() == false) {
                         writable.add(eachSequence);
                         eachSequence.setUsed(true);
                     }
@@ -236,9 +248,9 @@ public class SdpXmlGenerator2 {
             entity.setTS(dateFormat.format(sequence.getTimestamp()));
 
             // temporary, use index 0
-            entity.setMT(FieldData.moduleTypes[0]);
-            entity.setSN(FieldData.serverNames[0]);
-            entity.setSIP(FieldData.serverIPs[0]);
+            entity.setMT(this.moduleType);
+            entity.setSN(this.serverName);
+            entity.setSIP(this.serverIP);
 
             entity.setON(seqTransaction.getObjectName());
             entity.setMN(seqTransaction.getMethodName());
@@ -246,8 +258,7 @@ public class SdpXmlGenerator2 {
         }
 
         private void makeBodyData(BodyEntity entity, TransactionSequence sequence) {
-            String logType = FieldData.logTypes[0];
-            entity.setLTP(logType);
+            entity.setLTP(this.logType);
             if(logType.toUpperCase().equals("IN_RES") || logType.toUpperCase().equals("OUT_RES")) {
                 String codeVal = String.valueOf(sequence.getTransaction().getScreenId() % 2);
                 entity.setRC(codeVal);
