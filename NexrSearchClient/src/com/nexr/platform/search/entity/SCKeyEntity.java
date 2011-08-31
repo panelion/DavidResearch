@@ -14,6 +14,10 @@ public class SCKeyEntity {
     final String all;
     final String separator = "@";
 
+    public String getAll() {
+        return all;
+    }
+
     public SCKeyEntity(String iSwitch, String iBsc, String iCell, String iEndTime) {
         this.iSwitch = getValidValue(iSwitch) ;
         this.iBsc = getValidValue(iBsc);

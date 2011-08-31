@@ -9,7 +9,7 @@ package com.panelion.utils;
 public class ValidateUtils {
 
     public static String getValidValue(String value) {
-        return isNull(value) ? "null" : value;
+        return isNull(value) ? "null" : value.trim();
     }
 
     public static boolean isNull(String value) {

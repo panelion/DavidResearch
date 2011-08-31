@@ -141,10 +141,10 @@ public class CdrLogRecordDataProvider extends StreamDataProvider<RoutingEvent> {
      * @return  Map
      * @throws java.io.IOException  IOException
      */
-    private Map<SCKeyEntity, Map<String, String>> loadSCFileData(String filePath) throws IOException {
+    public Map<SCKeyEntity, Map<String, String>> loadSCFileData(String filePath) throws IOException {
         File file = new File(filePath);
 
-        String SEPARATOR = "\t";
+        String SEPARATOR = ",";
 
         Map<SCKeyEntity, Map<String, String>> joinMap = new HashMap<SCKeyEntity, Map<String, String>>();
 
@@ -168,11 +168,7 @@ public class CdrLogRecordDataProvider extends StreamDataProvider<RoutingEvent> {
                     } else {
                         rows = row.split(SEPARATOR, columnDefine.size());
                         for(int i = 0; i < columnDefine.size(); i++) {
-                            try {
-                                map.put(columnDefine.get(i), rows[i] == null ? "" : rows[i]);
-                            } catch(Exception e) {
-                                map.put(columnDefine.get(i), "");
-                            }
+                            map.put(columnDefine.get(i), ValidateUtils.getValidValue(rows[i]));
                         }
                     }
 

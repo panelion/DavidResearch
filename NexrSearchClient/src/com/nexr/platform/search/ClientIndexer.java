@@ -130,7 +130,7 @@ public class ClientIndexer implements DataConsumer<RoutingEvent> {
             // dataFilePath = "/Users/david/Execute/Data/SearchPlatform/CDR/srf_wcd_voice_1_2.csv";
             dataFilePath = "/Users/david/Execute/Data/SearchPlatform/CDR/sample_wcd_voice.csv";
 
-            sdComCellFilePath = "/Users/david/Execute/nexrsearch_client/config/sd_com_cell.txt";
+            sdComCellFilePath = "/Users/david/Execute/nexrsearch_client/config/sd_com_cell.csv";
             sdComSecFilePath = "/Users/david/Execute/nexrsearch_client/config/sd_com_sec.txt";
             serverIP = "127.0.0.1";
             usedColumnFilePath = "/Users/david/Execute/nexrsearch_client/config/wcd_used_column.txt";

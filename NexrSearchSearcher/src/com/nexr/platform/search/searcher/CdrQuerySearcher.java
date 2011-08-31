@@ -1,17 +1,12 @@
 package com.nexr.platform.search.searcher;
 
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.Client;
-import org.elasticsearch.client.action.search.SearchRequestBuilder;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
-import org.elasticsearch.common.xcontent.XContentBuilder;
-import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.index.query.QueryBuilder;
 
 import java.io.*;
-import java.util.Properties;
 
 import static org.elasticsearch.common.settings.ImmutableSettings.settingsBuilder;
 import static org.elasticsearch.index.query.xcontent.QueryBuilders.boolQuery;
@@ -25,11 +20,6 @@ import static org.elasticsearch.index.query.xcontent.QueryBuilders.termQuery;
  * Time: 오전 8:40
  */
 public class CdrQuerySearcher {
-
-    public static QueryBuilder cdrQuery = boolQuery()
-            .must(rangeQuery("I_CALL_DT").from("11/07/05").to("11/07/05"))
-            .must(rangeQuery("I_ETL_DT").from("11/07/05").to("11/07/05"))
-            .must(termQuery("I_CTN", "01077948054"));
 
     public static void main(String[] args) {
 
@@ -61,25 +51,38 @@ public class CdrQuerySearcher {
             System.exit(-1);
         }
 
+
+        System.out.println("Connecting Server.......");
+
         Client client = new TransportClient(settingsBuilder()
                         .put("cluster.name", clusterName)
                         .put("client", "true")
         ).addTransportAddress(new InetSocketTransportAddress(serverIP, port));
+
+
+        System.out.println("Start Search............");
 
         try {
             String row;
             SearchResponse response = null;
             long totalQueryTime = 0L, totalCount = 0L;
             while((row = reader.readLine()) != null) {
-                QueryBuilder cdrQuery = boolQuery()
-                    .must(rangeQuery("I_CALL_DT").from("11/07/05").to("11/07/05"))
-                    .must(rangeQuery("I_ETL_DT").from("11/07/05").to("11/07/06"))
-                    .must(termQuery("I_CTN", row));
+                row = row.trim();
 
-                response = client.prepareSearch().setQuery(cdrQuery.buildAsBytes()).execute().actionGet();
+                if(!row.isEmpty()) {
+                    QueryBuilder cdrQuery = boolQuery()
+                        .must(rangeQuery("I_CALL_DT").from("11/07/05").to("11/07/05"))
+                        .must(rangeQuery("I_ETL_DT").from("11/07/05").to("11/07/06"))
+                        .must(termQuery("I_CTN", row));
 
-                totalQueryTime += response.getTookInMillis();
-                totalCount++;
+                    response = client.prepareSearch().setQuery(cdrQuery.buildAsBytes()).execute().actionGet();
+
+                    totalQueryTime += response.getTookInMillis();
+
+                    totalCount++;
+
+                    if(totalCount % 1000 == 0) System.out.println(totalCount);
+                }
             }
 
             System.out.println(totalCount + " AVERAGE TIME (MILLISECONDS)  : " + String.format("%d", totalQueryTime / totalCount));
@@ -87,5 +90,7 @@ public class CdrQuerySearcher {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        client.close();
     }
 }
