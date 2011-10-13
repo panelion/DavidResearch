@@ -1,6 +1,5 @@
 package com.nexr.platform.search.util;
 
-import com.nexr.platform.search.ClientIndexer;
 import com.nexr.platform.search.consumer.DataConsumer;
 import com.nexr.platform.search.provider.DataProvider;
 
@@ -14,7 +13,7 @@ public class TimerClass extends TimerTask {
     private final DataConsumer _consumer;
     private PrintWriter _printWriter;
 
-    private volatile double _produceAvg = 0.0d;
+    // private volatile double _produceAvg = 0.0d;
     private volatile double _consumeAvg = 0.0d;
 
     private volatile long _produceTotalCount = 0L;
@@ -100,7 +99,7 @@ public class TimerClass extends TimerTask {
     }
 
     private void setAvgTps(long totalElapsedTime){
-        _produceAvg = ( _produceTotalCount  * _secondRate / totalElapsedTime ) ;
+        // _produceAvg = ( _produceTotalCount  * _secondRate / totalElapsedTime ) ;
         _consumeAvg = ( _consumeTotalCount * _secondRate / totalElapsedTime ) ;
     }
 

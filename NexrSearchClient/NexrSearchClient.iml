@@ -12,6 +12,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="NexrSearchClientLib" level="project" />
     <orderEntry type="module" module-name="DavidUtils" />
+    <orderEntry type="library" name="DefaultLib" level="project" />
   </component>
 </module>
 

@@ -1,12 +1,11 @@
 package com.nexr.platform.search.parser;
 
-import com.nexr.data.sdp.rolling.hdfs.LogRecord;
-import com.nexr.data.sdp.rolling.hdfs.LogRecordKey;
+import com.nexr.platform.collector.record.LogRecord;
+import com.nexr.platform.collector.record.LogRecordKey;
 import com.nexr.platform.search.utils.DateUtils;
 import com.nexr.platform.search.utils.io.MapFileWriter;
 
 import java.io.*;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -270,11 +269,11 @@ public class CdrDataParser {
             String logId = prefixLogId + String.format("%9d", dataCount);
             logRecordKey.setLogId(logId);
 
-            try {
+            /*try {
                 logRecordKey.setTime(LogRecordKey.formatter.format(format.parse(logRecord.getValue("I_RELEASE_TIME") + "00")));
             } catch (ParseException e) {
                 continue;
-            }
+            }*/
 
             logRecordKey.setDataType(logRecord.getValue("I_SERVICE"));
 

@@ -27,17 +27,18 @@ import static java.util.Collections.addAll;
 public class CdrLogRecordDataProvider extends StreamDataProvider<RoutingEvent> {
 
     private final String _ENCODING = "EUC-KR";
-    private final String ROUTING_EVENT_DATA_TYPE = "routing.event.data.type";
 
     private Properties _prof;
     private ArrayList<String> _arrColumnData, _arrUsedColumnData;
 
-    private Map<SCKeyEntity, Map<String, String>> _mapComCell;
-    private ArrayList<Map<String, String>> _mapComSec;
+    /*private Map<SCKeyEntity, Map<String, String>> _mapComCell;
+    private ArrayList<Map<String, String>> _mapComSec;*/
+
     private BufferedReader _dataReader;
 
     private final String _prefixLogId;
 
+    @Deprecated
     public CdrLogRecordDataProvider(Properties prof, String columnFilePath, String dataFilePath
             , String serverIP, String sdComCellFilePath, String sdComSecFilePath, String usedColumnFilePath)
             throws Exception {
@@ -54,8 +55,8 @@ public class CdrLogRecordDataProvider extends StreamDataProvider<RoutingEvent> {
                 _dataReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
             }
 
-            this.load_sd_com_cell(sdComCellFilePath);
-            this.load_sd_com_sec(sdComSecFilePath);
+            // this.load_sd_com_cell(sdComCellFilePath);
+            // this.load_sd_com_sec(sdComSecFilePath);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -67,13 +68,42 @@ public class CdrLogRecordDataProvider extends StreamDataProvider<RoutingEvent> {
         _produceCount = 0;
     }
 
+    public CdrLogRecordDataProvider(Properties prof, String columnFilePath, String dataFilePath, String serverIP, String usedColumnFilePath) throws Exception {
+
+        _prof = prof;
+        _arrColumnData = new ArrayList<String>();
+
+        try {
+            _arrColumnData = this.loadColumnData(columnFilePath);
+            _arrUsedColumnData = this.loadColumnData(usedColumnFilePath);
+
+            File file = new File(dataFilePath);
+            if(file.exists()) {
+                _dataReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+            }
+
+            // this.load_sd_com_cell(sdComCellFilePath);
+            // this.load_sd_com_sec(sdComSecFilePath);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new Exception(e.getMessage());
+        }
+
+        DateUtils dateUtils = new DateUtils("yyyyMMddHHmmss");
+        _prefixLogId = serverIP.replaceAll("\\.", "-") + "-" + dateUtils.getCurrentTime() + "-";
+        _produceCount = 0;
+    }
+
+    /*@Deprecated
     public void load_sd_com_cell(String filePath) throws IOException {
         _mapComCell = this.loadSCFileData(filePath);
     }
 
+    @Deprecated
     public void load_sd_com_sec(String filePath) throws IOException {
         _mapComSec = this.loadFileData(filePath);
-    }
+    }*/
 
     /**
      * Column 명이 정의 되어 있는 파일을 읽어, ArrayList<String> 타입 으로 저장 한다.
@@ -98,6 +128,7 @@ public class CdrLogRecordDataProvider extends StreamDataProvider<RoutingEvent> {
         return rtnVal;
     }
 
+    @Deprecated
     private ArrayList<Map<String, String>> loadFileData(String filePath) throws IOException {
         File file = new File(filePath);
         String SEPARATOR = "\t";
@@ -141,10 +172,11 @@ public class CdrLogRecordDataProvider extends StreamDataProvider<RoutingEvent> {
      * @return  Map
      * @throws java.io.IOException  IOException
      */
+    @Deprecated
     public Map<SCKeyEntity, Map<String, String>> loadSCFileData(String filePath) throws IOException {
         File file = new File(filePath);
 
-        String SEPARATOR = ",";
+        String SEPARATOR = "\t";
 
         Map<SCKeyEntity, Map<String, String>> joinMap = new HashMap<SCKeyEntity, Map<String, String>>();
 
@@ -167,6 +199,7 @@ public class CdrLogRecordDataProvider extends StreamDataProvider<RoutingEvent> {
                         addAll(columnDefine, rows);
                     } else {
                         rows = row.split(SEPARATOR, columnDefine.size());
+
                         for(int i = 0; i < columnDefine.size(); i++) {
                             map.put(columnDefine.get(i), ValidateUtils.getValidValue(rows[i]));
                         }
@@ -176,6 +209,7 @@ public class CdrLogRecordDataProvider extends StreamDataProvider<RoutingEvent> {
                         SCKeyEntity scKey = new SCKeyEntity(map.get("I_SWITCH"), map.get("I_BSC"), map.get("I_CELL"), map.get("I_ENDT"));
                         joinMap.put(scKey, map);
                     }
+
                     rowCount++;
                 }
             }
@@ -186,6 +220,7 @@ public class CdrLogRecordDataProvider extends StreamDataProvider<RoutingEvent> {
     @Override
     public DataConsumer.DataEvent<RoutingEvent> next() {
 
+        String ROUTING_EVENT_DATA_TYPE = "routing.event.data.type";
         MapRoutingEvent event = new MapRoutingEvent(_prof.getProperty(ROUTING_EVENT_DATA_TYPE, "TransactionLog"));
         Map<String, String> mapData = new HashMap<String, String>();
         String row = "";
@@ -207,16 +242,19 @@ public class CdrLogRecordDataProvider extends StreamDataProvider<RoutingEvent> {
             return null;
         }
 
-        String[] cols = row.split(",", _arrColumnData.size());
+        String[] cols = row.split("\t", _arrColumnData.size());
 
         String key, col;
         for(int i = 0 ; i < _arrColumnData.size(); i++){
             key = _arrColumnData.get(i);
             try {
                 col = cols[i].trim();
+                col = ValidateUtils.getValidValue(col);
+
             } catch(Exception e){
                 col = "";
             }
+
             if(col == null) col = "";
             mapData.put(key, col);
         }
@@ -224,7 +262,7 @@ public class CdrLogRecordDataProvider extends StreamDataProvider<RoutingEvent> {
         /**
          * nvl((select t_sec from sd_com_sec where i_sec = SV.I_SECTOR), '-') "SECTOR"
          */
-        String sectorVal = mapData.get("I_SECTOR");
+        /*String sectorVal = mapData.get("I_SECTOR");
         String sector = "-";
         for (Map<String, String> map : _mapComSec) {
             if (map.get("I_SEC").equals(sectorVal)) {
@@ -232,36 +270,43 @@ public class CdrLogRecordDataProvider extends StreamDataProvider<RoutingEvent> {
             }
         }
 
-        mapData.put("SECTOR", sector);
+        mapData.put("SECTOR", sector);*/
 
         /**
          * I_CTN 생성
          */
         String i_inout = mapData.get("I_INOUT");
         String i_ctn = "";
+        String i_inout_name = "";
         if(i_inout.equals("0")) {
             i_ctn = mapData.get("I_OUT_CTN");
+            i_inout_name = "발신";
         } else if(i_inout.equals("1")) {
             i_ctn = mapData.get("I_IN_CTN");
+            i_inout_name = "착신";
         }
 
         mapData.put("I_CTN", i_ctn);
+        mapData.put("I_INOUT_NAME", i_inout_name);
 
         /**
          * 기지국 생성
          */
-        String i_bsc = ValidateUtils.getValidValue(mapData.get("I_BSC"));
-        String i_cell = ValidateUtils.getValidValue(mapData.get("I_CELL"));
-        String temp_i_switch = "";
-        String en_dt = "99991231";
+        /*String i_bsc = ValidateUtils.getValidValue(mapData.get("I_BSC"));
+         String i_cell = ValidateUtils.getValidValue(mapData.get("I_CELL"));
+         String en_dt = "99991231";*/
 
+
+        String i_switch = "";
         if(i_inout.equals("0") || i_inout.equals("2") || i_inout.equals("4")) {
-            temp_i_switch = ValidateUtils.getValidValue(mapData.get("I_CALLING_SWITCH"));
+            i_switch = ValidateUtils.getValidValue(mapData.get("I_CALLING_SWITCH"));
         } else {
-            temp_i_switch = ValidateUtils.getValidValue(mapData.get("I_CALLED_SWITCH"));
+            i_switch = ValidateUtils.getValidValue(mapData.get("I_CALLED_SWITCH"));
         }
 
-        SCKeyEntity scKey = new SCKeyEntity(temp_i_switch, i_bsc, i_cell, en_dt);
+        mapData.put("I_SWITCH", i_switch);
+
+        /*SCKeyEntity scKey = new SCKeyEntity(temp_i_switch, i_bsc, i_cell, en_dt);
 
         String u_cell = "";
 
@@ -270,8 +315,8 @@ public class CdrLogRecordDataProvider extends StreamDataProvider<RoutingEvent> {
         } else {
             u_cell = mapData.get("I_CELL");
         }
-
         event.put("U_CELL", u_cell);
+        */
 
         event.setId(_prefixLogId + String.format("%09d", _produceCount));
 

@@ -20,25 +20,25 @@
                 "store" : "yes",
                 "index" : "not_analyzed"
             },
-            "U_CELL" : {
+            "I_INOUT_NAME" : {
                 "type" : "string",
                 "store" : "yes",
                 "index" : "no"
             },
-            "SECTOR" : {
+            "I_SWITCH" : {
                 "type" : "string",
                 "store" : "yes",
-                "index" : "no"
+                "index" : "not_analyzed"
             },
             "I_ETL_DT" : {
                 "type" : "date",
-                "format" : "yy/MM/dd",
+                "format" : "yyyy-MM-dd HH:mm:ss",
                 "store" : "yes",
                 "index" : "not_analyzed"
             },
             "I_CALL_DT" : {
                 "type" : "date",
-                "format" : "yy/MM/dd",
+                "format" : "yyyy-MM-dd HH:mm:ss",
                 "store" : "yes",
                 "index" : "not_analyzed"
             },
@@ -90,17 +90,17 @@
             "I_BSC" : {
                 "type" : "string",
                 "store" : "yes",
-                "index" : "no"
+                "index" : "not_analyzed"
             },
             "I_CELL" : {
                 "type" : "string",
                 "store" : "yes",
-                "index" : "no"
+                "index" : "not_analyzed"
             },
             "I_SECTOR" : {
                 "type" : "string",
                 "store" : "yes",
-                "index" : "no"
+                "index" : "not_analyzed"
             },
             "I_IN_ROUTE" : {
                 "type" : "string",

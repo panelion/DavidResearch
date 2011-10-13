@@ -1,7 +1,7 @@
 package com.nexr.platform.search.checker;
 
-import com.nexr.data.sdp.rolling.hdfs.LogRecord;
-import com.nexr.data.sdp.rolling.hdfs.LogRecordKey;
+import com.nexr.platform.collector.record.LogRecord;
+import com.nexr.platform.collector.record.LogRecordKey;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.fs.RawLocalFileSystem;

@@ -72,20 +72,20 @@ public class ClientIndexer implements DataConsumer<RoutingEvent> {
 
     public static void main(String[] args) throws InterruptedException, IOException {
 
-        String confFilePath, dataFilePath, logFilePath;
+        String configFilePath, dataFilePath, logFilePath;
         String columnFilePath, sdComCellFilePath, sdComSecFilePath, serverIP, usedColumnFilePath;
         boolean isCdr;
         if(args.length > 0) {
-            confFilePath = args[0];
+            configFilePath = args[0];
             dataFilePath = args[1];
             logFilePath = args[2];
             isCdr = Boolean.parseBoolean(args[3]);
 
             columnFilePath = args[4];
             serverIP = args[5];
-            sdComCellFilePath = args[6];
-            sdComSecFilePath = args[7];
-            usedColumnFilePath = args[8];
+            // sdComCellFilePath = args[6];
+            // sdComSecFilePath = args[7];
+            usedColumnFilePath = args[6];
 
         } else {
             /************************************************************************************************************************
@@ -111,7 +111,7 @@ public class ClientIndexer implements DataConsumer<RoutingEvent> {
             isCdr = false;*/
 
             /* CDR Config with Sequence Local File Data */
-            confFilePath = "/Users/david/IdeaProjects/DavidResearch/NexrSearchClient/config/properties/CdrClient.conf";
+            configFilePath = "/Users/david/IdeaProjects/DavidResearch/NexrSearchClient/config/properties/CdrClient.conf";
             dataFilePath = "/Users/david/Data/SearchPlatform/CDR/hdfs/data";
             logFilePath = "/Users/david/IdeaProjects/DavidResearch/NexrSearchClient/logs/cdrIndexing.log";
             isCdr = true;
@@ -125,13 +125,14 @@ public class ClientIndexer implements DataConsumer<RoutingEvent> {
              * String sdComCellFilePath
              * String sdComSecFilePath
              */
-            confFilePath = "/Users/david/IdeaProjects/DavidResearch/NexrSearchClient/config/properties/CdrClient.conf";
-            columnFilePath = "/Users/david/Execute/nexrsearch_client/config/wcd_column.txt";
-            // dataFilePath = "/Users/david/Execute/Data/SearchPlatform/CDR/srf_wcd_voice_1_2.csv";
-            dataFilePath = "/Users/david/Execute/Data/SearchPlatform/CDR/sample_wcd_voice.csv";
+            configFilePath = "/Users/david/IdeaProjects/DavidResearch/NexrSearchClient/config/properties/CdrClient.conf";
+            dataFilePath = "/Users/david/Execute/Data/SearchPlatform/CDR/sample_cdr_data.csv";
+            logFilePath = "/Users/david/IdeaProjects/DavidResearch/NexrSearchClient/logs/cdrIndexing.log";
+            isCdr = true;
 
+            columnFilePath = "/Users/david/Execute/nexrsearch_client/config/wcd_column.txt";
             sdComCellFilePath = "/Users/david/Execute/nexrsearch_client/config/sd_com_cell.csv";
-            sdComSecFilePath = "/Users/david/Execute/nexrsearch_client/config/sd_com_sec.txt";
+            sdComSecFilePath = "/Users/david/Execute/nexrsearch_client/config/sd_com_sec.csv";
             serverIP = "127.0.0.1";
             usedColumnFilePath = "/Users/david/Execute/nexrsearch_client/config/wcd_used_column.txt";
         }
@@ -139,7 +140,7 @@ public class ClientIndexer implements DataConsumer<RoutingEvent> {
         /**
          * 설정 파일을 읽어 온다.
          */
-        FileInputStream fs = new FileInputStream(confFilePath);
+        FileInputStream fs = new FileInputStream(configFilePath);
         Properties properties = new Properties();
         properties.load(fs);
 
@@ -151,7 +152,7 @@ public class ClientIndexer implements DataConsumer<RoutingEvent> {
         DataProvider<RoutingEvent> provider = null;
         // if(isCdr) provider = new CdrXContentDataProvider(dataFilePath, properties);
          try {
-            if(isCdr) provider = new CdrLogRecordDataProvider(properties, columnFilePath, dataFilePath, serverIP, sdComCellFilePath, sdComSecFilePath, usedColumnFilePath);
+            if(isCdr) provider = new CdrLogRecordDataProvider(properties, columnFilePath, dataFilePath, serverIP, usedColumnFilePath);
             else provider = new SdpXContentDataProvider(dataFilePath, properties);
             provider.setBatchSize(1000);
         } catch (Exception e) {

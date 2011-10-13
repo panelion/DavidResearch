@@ -1,7 +1,7 @@
 package com.nexr.platform.search.provider;
 
-import com.nexr.data.sdp.rolling.hdfs.LogRecord;
-import com.nexr.data.sdp.rolling.hdfs.LogRecordKey;
+import com.nexr.platform.collector.record.LogRecord;
+import com.nexr.platform.collector.record.LogRecordKey;
 import com.nexr.platform.search.consumer.DataConsumer;
 import com.nexr.platform.search.router.MapRoutingEvent;
 import com.nexr.platform.search.router.RoutingEvent;

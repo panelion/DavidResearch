@@ -9,6 +9,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="DavidUtils" />
     <orderEntry type="library" name="NexrSearchCompare" level="project" />
+    <orderEntry type="library" name="DefaultLib" level="project" />
   </component>
 </module>
 

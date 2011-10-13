@@ -1,7 +1,7 @@
 package com.nexr.platform.search.parser;
 
-import com.nexr.data.sdp.rolling.hdfs.LogRecord;
-import com.nexr.data.sdp.rolling.hdfs.LogRecordKey;
+import com.nexr.platform.collector.record.LogRecord;
+import com.nexr.platform.collector.record.LogRecordKey;
 import com.nexr.platform.search.utils.io.AppendRootInputStream;
 import com.nexr.platform.search.utils.io.MapFileWriter;
 

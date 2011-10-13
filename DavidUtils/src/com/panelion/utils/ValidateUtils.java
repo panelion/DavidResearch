@@ -9,11 +9,11 @@ package com.panelion.utils;
 public class ValidateUtils {
 
     public static String getValidValue(String value) {
-        return isNull(value) ? "null" : value.trim();
+        return isNull(value) ? "" : value.trim();
     }
 
     public static boolean isNull(String value) {
-        return value == null || value.trim().length() == 0 || value.equalsIgnoreCase("null");
+        return value == null || value.trim().length() == 0 || value.equalsIgnoreCase("null") || value.equalsIgnoreCase("\\N");
     }
 
 }

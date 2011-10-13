@@ -70,8 +70,8 @@ public class Chart extends ApplicationFrame {
 
         final JFreeChart chart = ChartFactory.createXYLineChart(
             title,                     // chart title
-            "time (Hours)",          // domain axis label
-            "TPS",                     // range axis label
+            "run count",          // domain axis label
+            "ns (nano seconds)",                     // range axis label
             dataSet,                   // data
             PlotOrientation.VERTICAL,  // orientation
             true,                      // include legend

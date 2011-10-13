@@ -1,7 +1,7 @@
 package com.nexr.platform.search.provider;
 
-import com.nexr.data.sdp.rolling.hdfs.LogRecord;
-import com.nexr.data.sdp.rolling.hdfs.LogRecordKey;
+import com.nexr.platform.collector.record.LogRecord;
+import com.nexr.platform.collector.record.LogRecordKey;
 import com.nexr.platform.search.consumer.DataConsumer;
 import com.nexr.platform.search.router.MapRoutingEvent;
 import com.nexr.platform.search.router.RoutingEvent;
@@ -65,11 +65,11 @@ public class CdrXContentDataProvider extends StreamDataProvider<RoutingEvent> {
 
                 event.setId(logRecordKey.getLogId());
 
-                try {
+                /*try {
                     event.setTimeStamp(LogRecordKey.formatter.parse(logRecordKey.getTime()).getTime());
                 } catch (ParseException e) {
                     e.printStackTrace();
-                }
+                }*/
 
                 for(String field : logRecord.getFields()){
                     event.put(field, logRecord.getValue(field).trim());

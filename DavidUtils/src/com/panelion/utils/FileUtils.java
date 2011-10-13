@@ -1,6 +1,10 @@
 package com.panelion.utils;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -78,6 +82,54 @@ public class FileUtils {
         if(_reader != null) _reader.close();
         if(_file != null) _file = null;
     }
+
+    public List<Map<String, Object>> getHorizonTableFile() {
+        return this.getHorizonTableFile("UTF-8", "\t");
+    }
+
+    public List<Map<String, Object>> getHorizonTableFile(String strSplit) {
+        return this.getHorizonTableFile("UTF-8", strSplit);
+    }
+
+    public List<Map<String, Object>> getHorizonTableFile(String encoding, String strSplit) {
+        List<Map<String, Object>> tableData = new ArrayList<Map<String, Object>>();
+        List<String> columnList = new ArrayList<String>();
+
+        try {
+            this.setReadable(encoding);
+
+            String line;
+            int lineCount = 0;
+
+            while((line = this.getReadLine()) != null) {
+                // line no.1 is Column Define.
+                if(lineCount == 0) {
+                    String[] cols = line.split(strSplit);
+                    for(String col : cols) {
+                        columnList.add(col.trim());
+                    }
+                // Data rows
+                } else {
+                    Map<String, Object> map = new HashMap<String, Object>();
+                    String[] cols = line.split(strSplit, columnList.size());
+
+                    for(int i = 0 ; i < columnList.size(); i++) {
+                        map.put(columnList.get(i), (cols[i] == null) ? "" : cols[i].trim());
+                    }
+
+                    tableData.add(map);
+                }
+
+                lineCount++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return tableData;
+    }
+
+
 
     public static void main(String[] args) throws IOException {
         FileUtils fileUtils = new FileUtils("/home/david/test/test/test/1.txt");

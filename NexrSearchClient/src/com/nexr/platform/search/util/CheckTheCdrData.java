@@ -17,8 +17,6 @@ import static java.util.Collections.addAll;
  */
 public class CheckTheCdrData {
 
-    private final String _ENCODING = "EUC-KR";
-
     public Map<SCKeyEntity, Map<String, String>> loadSCFileData(String filePath) throws IOException {
         File file = new File(filePath);
 
@@ -27,6 +25,7 @@ public class CheckTheCdrData {
         Map<SCKeyEntity, Map<String, String>> joinMap = new HashMap<SCKeyEntity, Map<String, String>>();
 
         if(file.exists()) {
+            String _ENCODING = "EUC-KR";
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), _ENCODING));
             String row;
             int rowCount = 0;
@@ -79,7 +78,7 @@ public class CheckTheCdrData {
         try {
             mapData = checkTheCdrData.loadSCFileData(sdComCellFilePath);
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
 
         try {
@@ -93,7 +92,6 @@ public class CheckTheCdrData {
             while((row = reader.readLine()) != null) {
                  if(!row.isEmpty()) {
 
-                    Map<String, String> map = new HashMap<String, String>();
                     String[] rows;
 
                     if(rowCount == 0) {
@@ -149,11 +147,11 @@ public class CheckTheCdrData {
 
 
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
 
     }

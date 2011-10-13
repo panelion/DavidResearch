@@ -341,9 +341,9 @@ public class NexrSearchCompare {
     }
 
     public static void main(String[] args) {
-        String url = "jdbc:oracle:thin:@192.168.4.197:1521:ktfsas1";
-        String id = "hadoop_user";
-        String pwd = "hadoop_user";
+        String oracle_url = "jdbc:oracle:thin:@192.168.4.197:1521:ktfsas1";
+        String oracle_id = "hadoop_user";
+        String oracle_pwd = "hadoop_user";
         // String query = "select * from srf_wcd_voice where rownum < 10";
 
         String clusterName = "nexr";
@@ -357,7 +357,7 @@ public class NexrSearchCompare {
 
         NexrSearchCompare compare = new NexrSearchCompare();
 
-        Map<CdrResultEntity, Map<String, String>> oracleResult = compare.getResultForOracle(url, id, pwd, compare.getOracleQuery(phoneNumber));
+        Map<CdrResultEntity, Map<String, String>> oracleResult = compare.getResultForOracle(oracle_url, oracle_id, oracle_pwd, compare.getOracleQuery(phoneNumber));
         Map<CdrResultEntity, Map<String, String>> nexrResult = compare.getResultForNexr(clusterName, serverIP, port, startDate, endDate, phoneNumber);
 
 

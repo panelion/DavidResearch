@@ -11,6 +11,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="NexrSearchResultLib" level="project" />
+    <orderEntry type="library" name="DefaultLib" level="project" />
   </component>
 </module>
 
