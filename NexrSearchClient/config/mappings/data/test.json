@@ -1,0 +1,40 @@
+{
+    "test" : {
+        "_all" : {"enabled" : false},
+        "_source" : {"enabled" : false},
+        "_type" : {"index" : "no"},
+
+        "_routing" :    {
+            "required" : true,
+            "path" : "test1"
+        },
+        "_meta" : {
+            "nexr.filters" : {
+                "selection" : {"defined":true }
+            }
+        },
+
+        "properties" : {
+            "test1" : {
+                "type" : "string",
+                "store" : "yes",
+                "index" : "not_analyzed"
+            },
+            "test2" : {
+                "type" : "string",
+                "store" : "yes",
+                "index" : "not_analyzed"
+            },
+            "test3" : {
+                "type" : "string",
+                "store" : "yes",
+                "index" : "not_analyzed"
+            },
+            "test4" : {
+                "type" : "string",
+                "store" : "yes",
+                "index" : "not_analyzed"
+            }
+        }
+    }
+}
