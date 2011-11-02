@@ -152,7 +152,6 @@ public class CdrQuerySearcher {
             .must(termQuery("I_CTN", phoneNum)
             );
 
-
         SearchResponse response = _nodeClient.search().prepareSearch().setPreference("_primary").setQuery(cdrQuery.buildAsBytes()).addFields(fields).setSize(300).execute().actionGet();
 
         System.out.println(response.getHits().getHits().length);
@@ -178,7 +177,7 @@ public class CdrQuerySearcher {
             phone_list_file_path = "/Users/david/Execute/Data/test/phone_number.csv";
             // serverList = "192.168.4.92:9200";
 
-            serverList = "192.168.4.92:9300";
+            serverList = "192.168.4.92:9300,192.168.4.92:9300,192.168.4.92:9300,192.168.4.92:9300,192.168.4.92:9300";
             clusterName = "nexr_david";
             // runCount = 10;
         }
