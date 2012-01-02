@@ -124,8 +124,6 @@ public class NexrSearchCompare {
                         // .must(termQuery("I_SERVICE_GRP" , "10"))
                         ;
 
-
-
         int totalCount = 0;
         int size = 10;
         Long getTotalHits = 0L;
@@ -368,32 +366,6 @@ public class NexrSearchCompare {
         System.out.println("oracle Query Count : " + oracleResult.size() + " , NexR Search Query Count : " + nexrResult.size());
 
         compare.compare(oracleResult, nexrResult);
-
-
-        /*System.out.println("*************************************************");
-        System.out.println("Oracle Result.");
-        System.out.println("*************************************************");
-
-        for(int i = 0 ; i < oracleResult.size(); i++){
-            Map<String, String> map = oracleResult.get(i);
-            for(Map.Entry<String, String> entry : map.entrySet()) {
-                System.out.println( entry.getKey() + " : " + entry.getValue());
-            }
-
-        }
-
-        System.out.println("*************************************************");
-        System.out.println("Nexr Search Result.");
-        System.out.println("*************************************************");
-
-        for(int i = 0 ; i < nexrResult.size(); i++){
-            Map<String, String> map = nexrResult.get(i);
-            for(Map.Entry<String, String> entry : map.entrySet()) {
-                System.out.println( entry.getKey() + " : " + entry.getValue());
-            }
-
-        }*/
-
     }
 
 }

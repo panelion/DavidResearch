@@ -613,17 +613,24 @@
     </library>
     <library name="DefaultLib">
       <CLASSES>
-        <root url="file://$PROJECT_DIR$/../DPSR_DEV/distribution/target/nexr-search-1.0.0.1002-bin/plugins/nexr" />
-        <root url="file://$PROJECT_DIR$/../DPSR_DEV/distribution/target/nexr-search-1.0.0.1002-bin/lib" />
+        <root url="file://$PROJECT_DIR$/../DPSR_DEV/distribution/target/nexr-search-1.0.0.1004-bin/lib" />
+        <root url="file://$PROJECT_DIR$/../DPSR_DEV/distribution/target/nexr-search-1.0.0.1004-bin/plugins" />
+        <root url="file://$PROJECT_DIR$/../DPSR_DEV/distribution/target/nexr-search-1.0.0.1004-bin/lib" />
+        <root url="file://$PROJECT_DIR$/../DPSR_DEV/distribution/target/nexr-search-1.0.0.1004-bin/plugins/nexr" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
         <root url="file://$PROJECT_DIR$/../DPSR_DEV/client/src/main/java" />
         <root url="file://$PROJECT_DIR$/../DPSR_DEV/core/src/main/java" />
         <root url="file://$PROJECT_DIR$/../DPSR_DEV/plugin/src/main/java" />
+        <root url="file://$PROJECT_DIR$/../DPSR_DEV/distribution/target/nexr-search-1.0.0.1004-bin/lib" />
+        <root url="file://$PROJECT_DIR$/../DPSR_DEV/distribution/target/nexr-search-1.0.0.1004-bin/lib" />
       </SOURCES>
-      <jarDirectory url="file://$PROJECT_DIR$/../DPSR_DEV/distribution/target/nexr-search-1.0.0.1002-bin/lib" recursive="false" />
-      <jarDirectory url="file://$PROJECT_DIR$/../DPSR_DEV/distribution/target/nexr-search-1.0.0.1002-bin/plugins/nexr" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/../DPSR_DEV/distribution/target/nexr-search-1.0.0.1004-bin/lib" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/../DPSR_DEV/distribution/target/nexr-search-1.0.0.1004-bin/lib" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/../DPSR_DEV/distribution/target/nexr-search-1.0.0.1004-bin/plugins/nexr" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/../DPSR_DEV/distribution/target/nexr-search-1.0.0.1004-bin/lib" recursive="false" type="SOURCES" />
+      <jarDirectory url="file://$PROJECT_DIR$/../DPSR_DEV/distribution/target/nexr-search-1.0.0.1004-bin/lib" recursive="false" type="SOURCES" />
     </library>
     <library name="NexrSearchClientLib">
       <CLASSES />

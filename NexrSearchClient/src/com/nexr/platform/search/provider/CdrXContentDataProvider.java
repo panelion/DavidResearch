@@ -11,7 +11,6 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.SequenceFile;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.Properties;
 
 /**
